@@ -2,12 +2,9 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES2020",
-    "declaration": true,
     "strict": true,
-    "outDir": "./dist",
-    "moduleResolution": "node",
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
   },
-  "include": ["src/*"],
+  "include": ["./src/*", "index.ts"],
 }
