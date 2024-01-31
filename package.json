@@ -4,8 +4,7 @@
   "private": "true",
   "license": "MIT",
   "scripts": {
-    "build:libs": "yarn install && cd dto && npx tsc && cd ../db && npx prisma generate ",
-    "build:apps": "yarn install && cd backend && yarn test && yarn lint && yarn build && cd ../ui yarn lint && yarn build"
+    "build:apps": "yarn install && cd db && npx prisma generate && cd ../backend && yarn test && yarn lint && yarn build && cd ../ui yarn lint && yarn build"
   },
   "workspaces": [
     "ui",
