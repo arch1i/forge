@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from '@app/domain/auth/auth.module';
-import { RoleGuard } from '@app/domain/auth/guards/role.guard';
+import { AuthModule } from '~/domain/auth/auth.module';
+import { RoleGuard } from '~/domain/auth/guards/role.guard';
 import { APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 

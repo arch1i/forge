@@ -1,11 +1,14 @@
 import { JwtService } from '@nestjs/jwt';
-import { extractTokenFromHeader } from '@app/domain/auth/lib/extractTokenFromHeader';
+import { extractTokenFromHeader } from '~/domain/auth/lib/extractTokenFromHeader';
 import { CanActivate, ExecutionContext, HttpException, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
-  constructor(private reflector: Reflector, private jwtService: JwtService) {}
+  constructor(
+    private reflector: Reflector,
+    private jwtService: JwtService,
+  ) {}
 
   private matchRoles(roles: string[], userRole: string) {
     return roles.some((role) => role === userRole);

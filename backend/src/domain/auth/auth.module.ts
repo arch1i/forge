@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { HashService } from '@app/domain/auth/services/hash.service';
-import { VerificationService } from '@app/domain/auth/services/verification.service';
-import { MailModule } from '@app/infrastructure/mail/mail.module';
+import { HashService } from '~/domain/auth/services/hash.service';
+import { VerificationService } from '~/domain/auth/services/verification.service';
+import { MailModule } from '~/infrastructure/mail/mail.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserModule } from '@app/domain/user/user.module';
-import { PrismaService } from '@app/infrastructure/db/prisma.service';
-import { AuthService } from '@app/domain/auth/services/auth.service';
-import { AuthController } from '@app/domain/auth/controller/auth.controller';
+import { UserModule } from '~/domain/user/user.module';
+import { PrismaService } from '~/infrastructure/db/prisma.service';
+import { AuthService } from '~/domain/auth/services/auth.service';
+import { AuthController } from '~/domain/auth/controller/auth.controller';
 
 @Module({
   imports: [

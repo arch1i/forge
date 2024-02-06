@@ -1,5 +1,5 @@
-import { sendgridProviders } from '@app/infrastructure/mail/providers/sendgrid.providers';
-import { SendgridService } from '@app/infrastructure/mail/services/sendgrid.service';
+import { sendgridProviders } from '~/infrastructure/mail/providers/sendgrid.providers';
+import { SendgridService } from '~/infrastructure/mail/services/sendgrid.service';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 

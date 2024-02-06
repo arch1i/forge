@@ -1,10 +1,10 @@
 import { z } from 'nestjs-zod/z';
-import { UserRepository } from '@app/domain/user/services/user.repository';
+import { UserRepository } from '~/domain/user/services/user.repository';
 import { HttpException, HttpStatus, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { type User } from '@prisma/client';
 import { generateVerificationCode } from './../lib/generateVerificationCode';
-import { PrismaService } from '@app/infrastructure/db/prisma.service';
-import { SendgridService } from '@app/infrastructure/mail/services/sendgrid.service';
+import { PrismaService } from '~/infrastructure/db/prisma.service';
+import { SendgridService } from '~/infrastructure/mail/services/sendgrid.service';
 import { VerificationSchema } from 'dto';
 
 @Injectable()

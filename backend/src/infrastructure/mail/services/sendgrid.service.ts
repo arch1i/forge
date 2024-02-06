@@ -2,8 +2,8 @@ import { ConfigService } from '@nestjs/config';
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { MailService } from '@sendgrid/mail';
-import { SENDGRID_SERVICE } from '@app/infrastructure/mail/config/constants';
-import { SEND_VERIFICATION_CODE_TEMPLATE } from '@app/infrastructure/mail/config/templates';
+import { SENDGRID_SERVICE } from '~/infrastructure/mail/config/constants';
+import { SEND_VERIFICATION_CODE_TEMPLATE } from '~/infrastructure/mail/config/templates';
 import { from } from 'rxjs';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { SENDGRID_SERVICE } from '@app/infrastructure/mail/config/constants';
+import { SENDGRID_SERVICE } from '~/infrastructure/mail/config/constants';
 import { ConfigService } from '@nestjs/config';
 import { MailService } from '@sendgrid/mail';
 

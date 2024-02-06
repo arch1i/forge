@@ -1,19 +1,19 @@
 import { AppModule } from './../../../application/app.module';
-import { UserModule } from '@app/domain/user/user.module';
-import { AuthModule } from '@app/domain/auth/auth.module';
-import { UserRepository } from '@app/domain/user/services/user.repository';
-import { PrismaService } from '@app/infrastructure/db/prisma.service';
+import { UserModule } from '~/domain/user/user.module';
+import { AuthModule } from '~/domain/auth/auth.module';
+import { UserRepository } from '~/domain/user/services/user.repository';
+import { PrismaService } from '~/infrastructure/db/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotificationProvider } from '@prisma/client';
-import { HashService } from '@app/domain/auth/services/hash.service';
-import { VerificationService } from '@app/domain/auth/services/verification.service';
-import { SendgridService } from '@app/infrastructure/mail/services/sendgrid.service';
+import { HashService } from '~/domain/auth/services/hash.service';
+import { VerificationService } from '~/domain/auth/services/verification.service';
+import { SendgridService } from '~/infrastructure/mail/services/sendgrid.service';
 import { MailService } from '@sendgrid/mail';
-import { SENDGRID_SERVICE } from '@app/infrastructure/mail/config/constants';
-import { AuthService } from '@app/domain/auth/services/auth.service';
-import { AuthController } from '@app/domain/auth/controller/auth.controller';
+import { SENDGRID_SERVICE } from '~/infrastructure/mail/config/constants';
+import { AuthService } from '~/domain/auth/services/auth.service';
+import { AuthController } from '~/domain/auth/controller/auth.controller';
 
 const TEST_USER = {
   email: 'alexborysovdev@gmail.com',

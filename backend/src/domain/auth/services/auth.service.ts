@@ -1,6 +1,6 @@
-import { extractTokenFromHeader } from '@app/domain/auth/lib/extractTokenFromHeader';
-import { HashService } from '@app/domain/auth/services/hash.service';
-import { UserRepository } from '@app/domain/user/services/user.repository';
+import { extractTokenFromHeader } from '~/domain/auth/lib/extractTokenFromHeader';
+import { HashService } from '~/domain/auth/services/hash.service';
+import { UserRepository } from '~/domain/user/services/user.repository';
 import { LoginSchema } from 'dto';
 import { Injectable, HttpException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';

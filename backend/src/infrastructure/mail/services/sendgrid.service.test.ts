@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SendgridService } from '@app/infrastructure/mail/services/sendgrid.service';
+import { SendgridService } from '~/infrastructure/mail/services/sendgrid.service';
 import { MailService } from '@sendgrid/mail';
-import { generateVerificationCode } from '@app/domain/auth/lib/generateVerificationCode';
+import { generateVerificationCode } from '~/domain/auth/lib/generateVerificationCode';
 import { lastValueFrom } from 'rxjs';
-import { SENDGRID_SERVICE } from '@app/infrastructure/mail/config/constants';
+import { SENDGRID_SERVICE } from '~/infrastructure/mail/config/constants';
 import { ConfigModule } from '@nestjs/config';
 
 const TEST_USER = {
