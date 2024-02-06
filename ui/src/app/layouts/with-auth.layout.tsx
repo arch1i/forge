@@ -1,6 +1,6 @@
-import { authModel } from '@app/features/auth';
-import { Layout } from '@app/shared/ui/layout';
-import { sidebarModel } from '@app/widgets/app-sidebar';
+import { authModel } from '~/features/auth';
+import { Layout } from '~/shared/ui/layout';
+import { sidebarModel } from '~/widgets/app-sidebar';
 import { useAppDispatch } from '../store/hooks';
 import { useEffect } from 'react';
 

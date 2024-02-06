@@ -19,3 +19,5 @@ export const createStore = () => {
 
   return result;
 };
+
+export const store = createStore().store;

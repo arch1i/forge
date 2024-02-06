@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Navigate } from 'react-router-dom';
-import { type ExcludeStrict } from '@utils/types';
 import { type Role } from '@prisma/client';
-import { authModel } from '@app/features/auth';
+import { authModel } from '~/features/auth';
 
 const SUPER_ROLES = [] satisfies Role[];
 
