@@ -2,7 +2,7 @@ import { pathsToModuleNameMapper } from 'ts-jest';
 import type { JestConfigWithTsJest } from 'ts-jest';
 
 const moduleNameMapper = pathsToModuleNameMapper({
-  '@app/*': ['src/*'],
+  '~/*': ['src/*'],
 });
 
 const config: JestConfigWithTsJest = {
