@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { HttpStatusCode } from 'axios';
 import { LoginSchema } from 'dto';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authApi } from '~/features/auth/api/api.endpoints';
+import { authApi } from '~/features/auth/api/endpoints';
 import { tokenService } from '~/shared/services/jwt-token.service';
 import { actions } from '~/features/auth/model';
 

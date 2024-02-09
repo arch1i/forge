@@ -17,6 +17,7 @@
     "class-variance-authority": "^0.7.0",
     "compose-function": "^3.0.3",
     "dto": "1.0.0",
+    "framer-motion": "^11.0.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
     "react": "^18.2.0",
