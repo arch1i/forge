@@ -1,5 +1,19 @@
 import { type User } from '@prisma/client';
 
+export interface ModelState {
+  session?: User;
+
+  processes: {
+    signIn: SignInProcess;
+    login: LoginProcess;
+  };
+
+  effects: {
+    checkSession: EffectState;
+    login: EffectState;
+  };
+}
+
 export type Tab = 'sign-up' | 'log-in';
 
 export type Step = 'credentials' | 'verification';

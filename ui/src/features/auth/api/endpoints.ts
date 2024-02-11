@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { coreApi } from '~/shared/api';
 import { LoginSchema, SignUpSchema, VerificationSchema } from 'dto';
 import { type User } from '@prisma/client';
-import { Tokens } from '../model/types';
+import { type Tokens } from '../model/types';
 
 export const authApi = coreApi.injectEndpoints({
   endpoints: (builder) => ({

@@ -2,25 +2,11 @@ import { checkSession } from './effects/check-session';
 import { login } from './effects/login';
 import { tokenService } from '~/shared/services/jwt-token.service';
 
-import { type Tab, type SignInProcess, type Step, type LoginProcess } from './types';
+import { type Tab, type Step, type ModelState } from './types';
 import { type User } from '@prisma/client';
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface AuthModel {
-  session?: User;
-
-  processes: {
-    signIn: SignInProcess;
-    login: LoginProcess;
-  };
-
-  effects: {
-    checkSession: EffectState;
-    login: EffectState;
-  };
-}
-
-const initialState: AuthModel = {
+const initialState: ModelState = {
   session: undefined,
 
   processes: {
