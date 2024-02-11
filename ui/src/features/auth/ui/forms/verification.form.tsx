@@ -32,7 +32,7 @@ export const VerificationForm = ({
     if (timeToSwitchTab <= 0) {
       clearInterval(timeout);
 
-      dispatch(authModel.actions.signInProcessTabChanged('log-in'));
+      dispatch(authModel.events.signInProcessTabChanged('log-in'));
     }
     return () => clearInterval(timeout);
   }, [timeToSwitchTab, successfullyVerified]);

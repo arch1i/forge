@@ -11,7 +11,7 @@ export function withGuard(
   redirectTo?: RoutePath,
 ) {
   return function RouteElement(props: Record<string, unknown>) {
-    const session = authModel.useSession();
+    const session = authModel.subscribes.useSession();
 
     if (!session?.role || !isAccessGranted(session.role, permissibleRoles)) {
       return <Navigate to={redirectTo || '/auth/access-denied'} replace />;

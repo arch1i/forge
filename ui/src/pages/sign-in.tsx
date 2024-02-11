@@ -2,7 +2,7 @@ import { Typography } from 'antd';
 import { authModel, SignIn } from '~/features/auth';
 
 export default function SignInPage() {
-  const activeTab = authModel.useSignInProcessTab();
+  const activeTab = authModel.subscribes.useSignInProcessTab();
 
   return (
     <main className='flex flex-col w-full items-center pt-[1vh]'>

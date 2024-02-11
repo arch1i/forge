@@ -10,7 +10,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { error, status } = authModel.useLoginEffectState();
+  const { error, status } = authModel.subscribes.useLoginEffectState();
 
   const handleLogin = async (credentials: z.infer<typeof LoginSchema>) => {
     await dispatch(authModel.effects.login(credentials))

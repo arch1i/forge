@@ -14,3 +14,14 @@ declare type FunctionArgumentsType<F extends (...args: any) => void> = F extends
 ) => any
   ? A
   : never;
+
+declare type Model = {
+  events: unknown;
+  effects: unknown;
+  subscribes: unknown;
+  api: unknown;
+  kernel: {
+    name: string;
+    reducer: unknown;
+  };
+};

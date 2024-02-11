@@ -4,7 +4,7 @@ import { LoginSchema, SignUpSchema, VerificationSchema } from 'dto';
 import { type User } from '@prisma/client';
 import { type Tokens } from '../model/types';
 
-export const authApi = coreApi.injectEndpoints({
+const authApi = coreApi.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation<User, z.infer<typeof SignUpSchema>>({
       query: (body) => ({
@@ -55,4 +55,4 @@ export const authApi = coreApi.injectEndpoints({
   }),
 });
 
-export const { signUp, verify, login, session } = authApi.endpoints;
+export const api = authApi.endpoints;

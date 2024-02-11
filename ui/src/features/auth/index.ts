@@ -1,11 +1,14 @@
 import * as model from './model';
-import * as api from './api/endpoints';
+import { api } from './api/endpoints';
 
 // model
 export const authModel = {
-  ...model,
+  events: model.events,
+  effects: model.effects,
+  subscribes: model.subscribes,
+  kernel: model.kernel,
   api,
-};
+} satisfies Model;
 
 // UI
 export { AuthActions } from './ui/auth-actions.button';

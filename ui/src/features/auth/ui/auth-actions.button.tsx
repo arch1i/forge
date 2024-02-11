@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 export const AuthActions = () => {
   const dispatch = useAppDispatch();
 
-  const session = authModel.useSession();
+  const session = authModel.subscribes.useSession();
   const navigate = useNavigate();
 
   const handleRedirectToSignIn = () => {
@@ -17,7 +17,7 @@ export const AuthActions = () => {
   };
 
   const handleLogout = () => {
-    dispatch(authModel.actions.loggedOut());
+    dispatch(authModel.events.loggedOut());
     navigate('/');
   };
 

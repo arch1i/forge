@@ -5,7 +5,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 
 export const reducer = combineReducers({
   [coreApi.reducerPath]: coreApi.reducer,
-  [authModel.name]: authModel.reducer,
+  [authModel.kernel.name]: authModel.kernel.reducer,
 
   // [sidebarModel.name]: sidebarModel.reducer,
 });

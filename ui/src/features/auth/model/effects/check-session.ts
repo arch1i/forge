@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authApi } from '~/features/auth/api/endpoints';
-import { actions } from '..';
+import { api } from '../../api/endpoints';
+import { events } from '..';
 
 export const checkSession = createAsyncThunk('auth/check-session', async (_args, { dispatch }) => {
-  const { data: session } = await dispatch(authApi.endpoints.session.initiate());
+  const { data: session } = await dispatch(api.session.initiate());
+
   if (session?.user) {
-    dispatch(actions.sessionDefined(session.user));
+    dispatch(events.sessionDefined(session.user));
   }
 });

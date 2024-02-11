@@ -12,8 +12,8 @@ import { type OnSubmitResult } from '~/shared/ui/form';
 export const SignUp = () => {
   const dispatch = useAppDispatch();
 
-  const step = authModel.useSignInProcessStep();
-  const processCredentials = authModel.useSignInProcessCredentials();
+  const step = authModel.subscribes.useSignInProcessStep();
+  const processCredentials = authModel.subscribes.useSignInProcessCredentials();
 
   const [signUp, { isLoading: isSignUpLoading, error: signUpError }] =
     authModel.api.signUp.useMutation();
@@ -24,8 +24,8 @@ export const SignUp = () => {
     Reflect.deleteProperty(credentials, 'confirmPassword');
     const signedUser = await signUp(credentials).unwrap();
 
-    dispatch(authModel.actions.signInProcessCredentialsUpdated(signedUser));
-    dispatch(authModel.actions.signInProcessStepChanged('verification'));
+    dispatch(authModel.events.signInProcessCredentialsUpdated(signedUser));
+    dispatch(authModel.events.signInProcessStepChanged('verification'));
   };
 
   const handleVerify = async (payload: z.infer<typeof VerificationSchemaExtended>) => {

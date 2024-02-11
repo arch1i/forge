@@ -1,9 +1,9 @@
-import { useAppDispatch } from '~/app/store/hooks';
-import { authModel } from '~/features/auth';
-import { type SignInProcess } from '~/features/auth/model/types';
-import { Login } from '~/features/auth/ui/forms/log-in.form';
-import { SignUp } from '~/features/auth/ui/forms/sign-up.form';
 import { Tabs, TabsProps } from 'antd';
+import { authModel } from '~/features/auth';
+import { useAppDispatch } from '~/app/store/hooks';
+import { Login } from './/forms/log-in.form';
+import { SignUp } from './forms/sign-up.form';
+import { type SignInProcess } from '~/features/auth/model/types';
 
 const TAB_OPTIONS: TabsProps['items'] = [
   {
@@ -20,11 +20,11 @@ const TAB_OPTIONS: TabsProps['items'] = [
 
 export function SignIn() {
   const dispatch = useAppDispatch();
-  const activeTab = authModel.useSignInProcessTab();
+  const activeTab = authModel.subscribes.useSignInProcessTab();
 
   const handleChangeTab = (key: TypeOfValue<SignInProcess, 'tab'>) => {
-    dispatch(authModel.actions.signInProcessStepChanged('credentials'));
-    dispatch(authModel.actions.signInProcessTabChanged(key as TypeOfValue<SignInProcess, 'tab'>));
+    dispatch(authModel.events.signInProcessStepChanged('credentials'));
+    dispatch(authModel.events.signInProcessTabChanged(key as TypeOfValue<SignInProcess, 'tab'>));
   };
 
   return (
