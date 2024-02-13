@@ -6,6 +6,7 @@ import { RouterProvider } from 'react-router-dom';
 import { appRouter } from './router/config';
 
 import './styles/index.css';
+import '@mantine/core/styles.css';
 
 const ComposedApp = withProviders(() => <RouterProvider router={appRouter()} />);
 
