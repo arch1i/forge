@@ -7,19 +7,19 @@
 *,
 ::before,
 ::after {
-  box-sizing: border-box; 
-  border-width: 0; 
-  border-style: solid; 
-  border-color: theme('borderColor.DEFAULT', currentColor); 
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: theme('borderColor.DEFAULT', currentColor);
 }
 
 ::before,
 ::after {
-  --tw-content: '';
+    --tw-content: '';
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* Change Autocomplete styles */
@@ -30,20 +30,20 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: rgb(30, 30, 30) !important;
-  -webkit-box-shadow: rgb(30, 30, 30) !important;
-  box-shadow: rgb(30, 30, 30) !important;
-  color: rgb(30, 30, 30) !important;
-  font-size: 1rem;
+    -webkit-text-fill-color: rgb(30, 30, 30) !important;
+    -webkit-box-shadow: rgb(30, 30, 30) !important;
+    box-shadow: rgb(30, 30, 30) !important;
+    color: rgb(30, 30, 30) !important;
+    font-size: 1rem;
 }
 
 body::-webkit-scrollbar {
-  width: 4px;
+    width: 4px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 255, 0.622);
-  border-radius: 20px;
+    background-color: rgba(0, 0, 255, 0.622);
+    border-radius: 20px;
 }
 
 /* Normalize */
@@ -51,42 +51,42 @@ body::-webkit-scrollbar-thumb {
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  outline: none;
+    box-sizing: border-box;
+    outline: none;
 }
 
 *:focus {
-  outline: none;
+    outline: none;
 }
 
 html,
 body {
-  touch-action: manipulation;
+    touch-action: manipulation;
 }
 
 body {
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  overflow-anchor: none;
-  margin: 0;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    overflow-anchor: none;
+    margin: 0;
 }
 
 ul[class],
 ol[class] {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  text-decoration-skip-ink: auto;
-  text-decoration: none;
+    text-decoration-skip-ink: auto;
+    text-decoration: none;
 }
 
 article > * + * {
-  margin-top: 1em;
+    margin-top: 1em;
 }
 
 input {
-  background-color: transparent;
+    background-color: transparent;
 }

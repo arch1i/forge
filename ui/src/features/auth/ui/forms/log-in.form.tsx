@@ -7,32 +7,32 @@ import { Form } from '~/shared/ui/form';
 import { Input } from '~/shared/ui/input';
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
-  const { error, status } = authModel.subscribes.useLoginEffectState();
+    const { error, status } = authModel.subscribes.useLoginEffectState();
 
-  const handleLogin = async (credentials: z.infer<typeof LoginSchema>) => {
-    await dispatch(authModel.effects.login(credentials))
-      .unwrap()
-      .then(({ success }) => {
-        if (success) {
-          navigate('/');
-        }
-      });
-  };
+    const handleLogin = async (credentials: z.infer<typeof LoginSchema>) => {
+        await dispatch(authModel.effects.login(credentials))
+            .unwrap()
+            .then(({ success }) => {
+                if (success) {
+                    navigate('/');
+                }
+            });
+    };
 
-  return (
-    <Form
-      onSubmit={handleLogin}
-      schema={LoginSchema}
-      submitText='Log In'
-      className='w-full'
-      errorMessage={error}
-      isLoading={status === 'pending'}
-    >
-      <Input name='email' type='email' label='Email' />
-      <Input name='password' type='password' label='Password' />
-    </Form>
-  );
+    return (
+        <Form
+            onSubmit={handleLogin}
+            schema={LoginSchema}
+            submitText='Log In'
+            className='w-full'
+            errorMessage={error}
+            isLoading={status === 'pending'}
+        >
+            <Input name='email' type='email' label='Email' />
+            <Input name='password' type='password' label='Password' />
+        </Form>
+    );
 };

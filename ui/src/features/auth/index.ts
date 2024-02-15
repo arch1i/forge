@@ -3,11 +3,11 @@ import { api } from './api/endpoints';
 
 // model
 export const authModel = {
-  events: model.events,
-  effects: model.effects,
-  subscribes: model.subscribes,
-  kernel: model.kernel,
-  api,
+    events: model.events,
+    effects: model.effects,
+    subscribes: model.subscribes,
+    kernel: model.kernel,
+    api,
 } satisfies Model;
 
 // UI

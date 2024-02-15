@@ -1,7 +1,7 @@
 import AccessDenied from '~/pages/access-denied';
-import SignIn from '~/pages/sign-in';
+import Board from '~/pages/board';
 
 export const Pages = {
-  SignIn,
-  AccessDenied,
+    Board,
+    AccessDenied,
 };

@@ -1,6 +1,5 @@
 @layer utilities {
-    .shadow-r-sm { 
+    .shadow-r-sm {
         box-shadow: 3px 0 4px -2px rgba(75, 75, 75, 0.088);
     }
 }
-

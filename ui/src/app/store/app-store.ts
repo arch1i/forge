@@ -1,23 +1,27 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { reducer } from './reducer';
+import { authModel } from '~/features/auth';
 
 export const createStore = () => {
-  const _store = configureStore({
-    reducer,
-  });
+    const _store = configureStore({
+        reducer,
+    });
 
-  setupListeners(_store.dispatch);
+    setupListeners(_store.dispatch);
 
-  const result = {
-    store: _store,
-    and: function (callback: (dispatch: typeof _store.dispatch) => void) {
-      callback(_store.dispatch);
-      return result;
-    },
-  };
+    const extendedStore = {
+        store: _store,
 
-  return result;
+        and: function (callback: (dispatch: typeof _store.dispatch) => Promise<void> | void) {
+            callback(_store.dispatch);
+            return this;
+        },
+    };
+
+    return extendedStore;
 };
 
-export const store = createStore().store;
+export const store = createStore().and((dispatch) => {
+    dispatch(authModel.effects.defineSession());
+}).store;

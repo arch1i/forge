@@ -3,19 +3,20 @@ import { WithAuthLayout } from '~/app/layouts/with-auth.layout';
 import { Pages } from './pages';
 
 export const appRouter = () =>
-  createBrowserRouter([
-    {
-      element: <WithAuthLayout />,
-      children: [
+    createBrowserRouter([
         {
-          path: '/sign-in',
-          element: <Pages.SignIn />,
+            element: <WithAuthLayout />,
+            children: [
+                {
+                    path: '/',
+                    element: <Pages.Board />,
+                },
+
+                {
+                    path: '/access-denied',
+                    element: <Pages.AccessDenied />,
+                },
+            ],
         },
-        {
-          path: '/access-denied',
-          element: <Pages.AccessDenied />,
-        },
-      ],
-    },
-    {},
-  ]);
+        {},
+    ]);

@@ -9,14 +9,14 @@ declare type EffectStatus = 'idle' | 'pending' | 'fulfilled' | 'rejected';
 declare type RoutePath = string;
 
 declare type EffectState = {
-  status: EffectStatus;
-  error?: string;
+    status: EffectStatus;
+    error?: string;
 };
 
 declare type BaseError = {
-  data: {
-    message: string | undefined;
-    statusCode: number;
-  };
-  status: number;
+    data: {
+        message: string | undefined;
+        statusCode: number;
+    };
+    status: number;
 };

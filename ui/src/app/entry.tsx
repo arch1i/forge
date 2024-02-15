@@ -6,12 +6,11 @@ import { RouterProvider } from 'react-router-dom';
 import { appRouter } from './router/config';
 
 import './styles/index.css';
-import '@mantine/core/styles.css';
 
 const ComposedApp = withProviders(() => <RouterProvider router={appRouter()} />);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <ComposedApp />
-  </StrictMode>,
+    <StrictMode>
+        <ComposedApp />
+    </StrictMode>,
 );

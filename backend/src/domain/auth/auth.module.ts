@@ -10,19 +10,19 @@ import { AuthService } from '~/domain/auth/services/auth.service';
 import { AuthController } from '~/domain/auth/controller/auth.controller';
 
 @Module({
-  imports: [
-    ConfigModule,
-    UserModule,
-    MailModule,
-    JwtModule.registerAsync({
-      useFactory: async (config: ConfigService) => ({
-        secret: config.get('AUTH_SECRET_KEY'),
-      }),
-      inject: [ConfigService],
-    }),
-  ],
-  controllers: [AuthController],
-  providers: [HashService, VerificationService, PrismaService, AuthService],
-  exports: [JwtModule],
+    imports: [
+        ConfigModule,
+        UserModule,
+        MailModule,
+        JwtModule.registerAsync({
+            useFactory: async (config: ConfigService) => ({
+                secret: config.get('AUTH_SECRET_KEY'),
+            }),
+            inject: [ConfigService],
+        }),
+    ],
+    controllers: [AuthController],
+    providers: [HashService, VerificationService, PrismaService, AuthService],
+    exports: [JwtModule],
 })
 export class AuthModule {}
