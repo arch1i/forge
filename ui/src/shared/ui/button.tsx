@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import React, { type ReactNode } from 'react';
+import { type ReactNode, type ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Props extends VariantProps<typeof styles> {
@@ -7,7 +7,7 @@ interface Props extends VariantProps<typeof styles> {
     className?: string;
     disabled?: boolean;
     onClick?: () => void;
-    htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+    htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }
 
 export const Button = (props: Props) => {
