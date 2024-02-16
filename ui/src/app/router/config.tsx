@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { WithAuthLayout } from '~/app/layouts/with-auth.layout';
+import { BaseLayout } from '~/app/layouts/base-layout';
 import { Pages } from './pages';
 
 export const appRouter = () =>
     createBrowserRouter([
         {
-            element: <WithAuthLayout />,
+            element: <BaseLayout />,
             children: [
                 {
                     path: '/',
