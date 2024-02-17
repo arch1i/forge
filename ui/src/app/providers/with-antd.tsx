@@ -7,7 +7,7 @@ export const withAntdConfig = (component: () => ReactNode) => () => {
             wave={{ disabled: true }}
             theme={{
                 token: {
-                    fontFamily: 'Exo',
+                    fontFamily: 'Handlee',
                     motion: false,
                 },
             }}
