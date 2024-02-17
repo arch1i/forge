@@ -1,37 +1,33 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Loader } from './preloader';
 import { type ReactNode } from 'react';
 
 interface Props {
-    showSidebar: boolean;
-    isGlobalLoading: boolean;
-    sidebarSlot: ReactNode;
+    isAppLoading: boolean;
+    appMenuButtonSlot?: ReactNode;
 }
 
-export function Layout({ isGlobalLoading, showSidebar, sidebarSlot }: Props) {
+export function Layout({ isAppLoading, appMenuButtonSlot }: Props) {
     return (
         <AnimatePresence>
-            {isGlobalLoading ? (
-                <Loader size='md' color='blue' />
+            {isAppLoading ? (
+                <Loader size='md' color='blue' className='absolute top-[45vh] left-[50%]' />
             ) : (
                 <motion.main
                     key='layout'
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                    className='flex flex-row min-h-full'
+                    transition={{ duration: 0.3 }}
+                    className='flex flex-row min-h-full relative font-sans'
                 >
-                    {sidebarSlot}
+                    {appMenuButtonSlot && (
+                        <section className='absolute top-[1.6%] left-[2.2%] md:left-[1.7%] lg:left-[1.3%]'>
+                            {appMenuButtonSlot}
+                        </section>
+                    )}
 
-                    <section
-                        className={twMerge(
-                            showSidebar &&
-                                'blur-[3px] overflow-hidden pointer-events-none lg:pl-[27%] xl:pl-[24%] 2xl:pl-[20%] lg:pt-10',
-                            'flex-auto min-h-screen bg-white',
-                        )}
-                    >
+                    <section className='flex-auto min-h-screen bg-white'>
                         <Outlet />
                     </section>
 
