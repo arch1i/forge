@@ -6,6 +6,7 @@ export const kernel = {
     name,
     reducer,
 };
+export { initiate } from './initiate';
 
 export { actions as events } from './model.ts';
 

@@ -22,6 +22,4 @@ export const createStore = () => {
     return extendedStore;
 };
 
-export const store = createStore().and((dispatch) => {
-    dispatch(authModel.effects.defineSession());
-}).store;
+export const store = createStore().and(authModel.initiate).store;

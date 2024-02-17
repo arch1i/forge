@@ -20,6 +20,7 @@ declare type Model = {
     effects: unknown;
     subscribes: unknown;
     api: unknown;
+    initiate?: unknown;
     kernel: {
         name: string;
         reducer: unknown;

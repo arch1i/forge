@@ -7,6 +7,7 @@ export const authModel = {
     effects: model.effects,
     subscribes: model.subscribes,
     kernel: model.kernel,
+    initiate: model.initiate,
     api,
 } satisfies Model;
 
