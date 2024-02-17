@@ -43,7 +43,12 @@ const styles = cva('w-fit rounded-[4px] whitespace-nowrap tracking-wider font-sa
             lg: ['px-[13px] py-[6px]'],
         },
         disabled: {
-            true: ['cursor-not-allowed hover:none active:none'],
+            true: [
+                'cursor-not-allowed',
+                'hover:bg-transparent',
+                'active:bg-transparent',
+                'active:outline-none',
+            ],
         },
     },
 
