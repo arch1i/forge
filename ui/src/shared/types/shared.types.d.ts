@@ -16,10 +16,10 @@ declare type FunctionArgumentsType<F extends (...args: any) => void> = F extends
     : never;
 
 declare type Model = {
-    events: unknown;
-    effects: unknown;
-    subscribes: unknown;
-    api: unknown;
+    events?: unknown;
+    effects?: unknown;
+    subscribes?: unknown;
+    api?: unknown;
     initiate?: unknown;
     kernel: {
         name: string;
