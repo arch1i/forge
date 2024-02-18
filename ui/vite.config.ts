@@ -17,6 +17,7 @@ export default defineConfig({
 
     test: {
         globals: true,
+        reporters: ['verbose'],
         cache: {
             dir: '../../node_modules/.vitest',
         },
@@ -28,8 +29,10 @@ export default defineConfig({
             },
         },
 
-        deps: {
-            inline: ['vitest-canvas-mock'],
+        server: {
+            deps: {
+                inline: ['vitest-canvas-mock'],
+            },
         },
 
         include: [
