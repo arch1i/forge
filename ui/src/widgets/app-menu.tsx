@@ -19,7 +19,7 @@ export const AppMenu = () => {
 
 const Menu = () => {
     return (
-        <div className='shadow-box flex flex-col gap-y-[0.4rem] p-2 absolute top-10 left-0 rounded-[4px]'>
+        <div className='bg-white shadow-box flex flex-col gap-y-[0.4rem] p-2 absolute top-10 left-0 rounded-[4px]'>
             <MenuButton
                 type='transparent'
                 size='lg'
