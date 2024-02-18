@@ -20,12 +20,23 @@ export default defineConfig({
         cache: {
             dir: '../../node_modules/.vitest',
         },
+
         environment: 'jsdom',
+        environmentOptions: {
+            jsdom: {
+                resources: 'usable',
+            },
+        },
+
+        deps: {
+            inline: ['vitest-canvas-mock'],
+        },
 
         include: [
             'src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
             '__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
         ],
+
         setupFiles: ['__tests__/setup.js'],
     },
 });
