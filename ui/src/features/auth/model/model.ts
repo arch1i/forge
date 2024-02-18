@@ -88,8 +88,9 @@ const authModel = createSlice({
     },
 });
 
-export const actions = authModel.actions;
+export const events = authModel.actions;
 
-export const reducer = authModel.reducer;
-
-export const name = authModel.name;
+export const kernel = {
+    name: authModel.name,
+    reducer: authModel.reducer,
+} satisfies TypeOfValue<Model, 'kernel'>;
