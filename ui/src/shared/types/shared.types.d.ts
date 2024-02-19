@@ -15,6 +15,8 @@ declare type FunctionArgumentsType<F extends (...args: any) => void> = F extends
     ? A
     : never;
 
+declare type UniqueKey = `${string}-${string}-${string}-${string}-${string}`;
+
 declare type Model = {
     events?: unknown;
     effects?: unknown;
