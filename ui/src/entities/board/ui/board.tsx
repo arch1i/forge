@@ -19,6 +19,19 @@ export const Board = () => {
                     }),
                 );
             }}
+            onPointerUp={() => {
+                dispatch(events.pointerUp());
+            }}
+            onPointerMove={(ev) => {
+                const { x, y } = ev.currentTarget.getBoundingClientRect();
+                dispatch(
+                    events.pointerPositionChanged({
+                        clientX: ev.clientX,
+                        clientY: ev.clientY,
+                        currentTargetRect: { x, y },
+                    }),
+                );
+            }}
         >
             {elements.map((el) => {
                 return (
