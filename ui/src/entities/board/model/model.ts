@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { ModelState } from './types';
+import { type ModelState } from './types/state';
 import { type MouseEvent } from 'react';
 
 const initialState: ModelState = {
@@ -14,16 +14,24 @@ export const boardModel = createSlice({
             return initialState;
         },
 
-        clicked(state, action: PayloadAction<MouseEvent>) {
-            const { clientX, clientY } = action.payload;
+        pointerDown(
+            state,
+            action: PayloadAction<
+                Pick<MouseEvent, 'clientX' | 'clientY'> & {
+                    currentTargetRect: Pick<DOMRect, 'x' | 'y'>;
+                }
+            >,
+        ) {
+            const { clientX, clientY, currentTargetRect } = action.payload;
             state.shapes.push({
+                uniqueKey: crypto.randomUUID(),
                 position: {
-                    x: clientX,
-                    y: clientY,
+                    x: clientX - currentTargetRect.x,
+                    y: clientY - currentTargetRect.y,
                 },
                 size: {
-                    width: 50,
-                    height: 50,
+                    width: 40,
+                    height: 40,
                 },
                 type: 'rect',
                 styles: {

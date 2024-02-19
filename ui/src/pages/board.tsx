@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { Board } from '~/entities/board/ui/board';
 
 export default function BoardPage() {
-    return <main className='w-full min-h-screen'></main>;
+    return <Board />;
 }

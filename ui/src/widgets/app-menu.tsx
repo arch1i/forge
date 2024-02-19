@@ -1,5 +1,7 @@
 import { Divider } from 'antd';
 import { useReducer } from 'react';
+import { useAppDispatch } from '~/app/store/hooks';
+import { boardModel } from '~/entities/board';
 import { Icon } from '~/shared/ui/icon';
 import { MenuButton } from '~/shared/ui/menu-button';
 
@@ -12,12 +14,14 @@ export const AppMenu = () => {
                 content={<Icon section='primary' name='menu' className='w-[17px] h-[17px]' />}
                 onClick={toggle}
             />
-            {isDropdownVisible && <Menu />}
+            {isDropdownVisible && <Menu toggle={toggle} />}
         </section>
     );
 };
 
-const Menu = () => {
+const Menu = ({ toggle }: { toggle: () => void }) => {
+    const dispatch = useAppDispatch();
+
     return (
         <div className='bg-white shadow-box flex flex-col gap-y-[0.4rem] p-2 absolute top-10 left-0 rounded-[4px]'>
             <MenuButton
@@ -54,6 +58,10 @@ const Menu = () => {
             />
 
             <MenuButton
+                onClick={() => {
+                    dispatch(boardModel.events.reset());
+                    toggle();
+                }}
                 type='transparent'
                 size='lg'
                 content={
