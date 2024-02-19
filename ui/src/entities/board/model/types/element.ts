@@ -1,17 +1,15 @@
-export interface Shape {
-    type: ShapeType;
+export type Element = {
+    uniqueKey: string;
+
+    type: ElementType;
 
     position: Position;
     size: Size;
 
     styles: Styles;
-}
+};
 
-export interface ModelState {
-    shapes: Array<Shape>;
-}
-
-type ShapeType = 'rect' | 'circle';
+type ElementType = 'rect' | 'circle';
 
 type Position = {
     x: number;
