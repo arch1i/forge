@@ -22,7 +22,7 @@ export function Layout({ isAppLoading, appMenuButtonSlot }: Props) {
                     className='flex flex-row min-h-full relative font-sans'
                 >
                     {appMenuButtonSlot && (
-                        <section className='z-50 absolute top-[1.6%] left-[2.2%] md:left-[1.7%] lg:left-[1.3%]'>
+                        <section className='z-50 absolute top-[1rem] left-[2.2%] md:left-[1.7%] lg:left-[1.3%]'>
                             {appMenuButtonSlot}
                         </section>
                     )}
