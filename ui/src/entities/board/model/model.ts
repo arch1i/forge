@@ -23,15 +23,18 @@ export const boardModel = createSlice({
             >,
         ) {
             const { clientX, clientY, currentTargetRect } = action.payload;
-            const x = clientX - currentTargetRect.x;
-            const y = clientY - currentTargetRect.y;
+            const computed = {
+                x: clientX - currentTargetRect.x,
+                y: clientY - currentTargetRect.y,
+            };
+
             const uniqueKey = crypto.randomUUID();
 
             state.shapes.push({
                 uniqueKey,
                 position: {
-                    x,
-                    y,
+                    x: computed.x,
+                    y: computed.y,
                 },
                 size: {
                     width: 1,
@@ -46,9 +49,9 @@ export const boardModel = createSlice({
                 status: 'drafting-an-element',
                 drafting: {
                     elementKey: uniqueKey,
-                    initialPosition: {
-                        x,
-                        y,
+                    initialComputedPosition: {
+                        x: computed.x,
+                        y: computed.y,
                     },
                 },
             };
@@ -84,15 +87,23 @@ export const boardModel = createSlice({
             if (pointer.status === 'drafting-an-element' && pointer.drafting) {
                 const key = pointer.drafting?.elementKey;
                 const element = shapes.find((el) => el.uniqueKey === key);
-                const { x: initX, y: initY } = pointer.drafting.initialPosition;
+                const { x: initX, y: initY } = pointer.drafting.initialComputedPosition;
 
-                // ???
-                if (typeof initX !== 'number' || typeof initY !== 'number' || !element) return;
+                const computed = {
+                    x: clientX - currentTargetRect.x,
+                    y: clientY - currentTargetRect.y,
+                };
 
-                // both sides
+                if (isNaN(initX) || isNaN(initY) || !element) return;
+
                 element.size = {
-                    width: Math.abs(initX - (clientX - currentTargetRect.x)),
-                    height: Math.abs(initY - (clientY - currentTargetRect.y)),
+                    width: Math.abs(initX - computed.x),
+                    height: Math.abs(initY - computed.y),
+                };
+
+                element.position = {
+                    x: initX < computed.x ? element.position.x : computed.x,
+                    y: initY < computed.y ? element.position.y : computed.y,
                 };
             }
         },

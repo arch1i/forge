@@ -9,7 +9,7 @@ export interface ModelState {
 export type Pointer = {
     status: 'idle' | 'drafting-an-element';
     drafting?: {
-        initialPosition: Position;
+        initialComputedPosition: Position;
         elementKey: UniqueKey;
     };
 };
