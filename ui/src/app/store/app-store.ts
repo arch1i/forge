@@ -1,3 +1,4 @@
+import { listener } from './middleware';
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { reducer } from './reducer';
@@ -6,6 +7,7 @@ import { authModel } from '~/features/auth';
 export const createStore = () => {
     const _store = configureStore({
         reducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(listener.middleware),
     });
 
     setupListeners(_store.dispatch);
