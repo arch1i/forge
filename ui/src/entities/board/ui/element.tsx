@@ -1,8 +1,11 @@
+import { subscribes } from '../model';
 import { type Element as ElementInterface } from '../model/types/element';
 
 interface Params extends OmitStrict<ElementInterface, 'uniqueKey'> {}
 
 export const Element = ({ position, size }: Params) => {
+    const pointer = subscribes.usePointerStatus();
+
     return (
         <div
             style={{
@@ -11,8 +14,9 @@ export const Element = ({ position, size }: Params) => {
                 left: `${position.x}px`,
                 width: `${size.width}px`,
                 height: `${size.height}px`,
+                cursor: pointer === 'drafting-an-element' ? 'crosshair' : 'grab',
             }}
-            className='rounded-[20px] border-2 border-sky-500/95 cursor-pointer'
+            className='rounded-[20px] border-2 border-[#366fbc]'
         />
     );
 };

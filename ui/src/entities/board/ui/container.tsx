@@ -14,6 +14,7 @@ export const Container = ({ onPointerDown, onPointerUp, onPointerMove, children 
             onPointerDown={onPointerDown}
             onPointerUp={onPointerUp}
             onPointerMove={onPointerMove}
+            style={{ cursor: 'crosshair' }}
         >
             {children}
         </div>
