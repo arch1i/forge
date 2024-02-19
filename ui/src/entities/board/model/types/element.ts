@@ -1,5 +1,7 @@
+import { Position } from '~/shared/types/core/view';
+
 export type Element = {
-    uniqueKey: string;
+    uniqueKey: UniqueKey;
 
     type: ElementType;
 
@@ -10,11 +12,6 @@ export type Element = {
 };
 
 type ElementType = 'rect' | 'circle';
-
-type Position = {
-    x: number;
-    y: number;
-};
 
 type Size = {
     width: number;
