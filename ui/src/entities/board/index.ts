@@ -10,3 +10,6 @@ export const boardModel = {
         reducer: model.reducer,
     },
 };
+
+// ui
+export { Element } from './ui/element';
