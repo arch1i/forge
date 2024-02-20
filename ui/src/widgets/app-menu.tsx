@@ -59,7 +59,7 @@ const Menu = ({ toggle }: { toggle: () => void }) => {
 
             <MenuButton
                 onClick={() => {
-                    dispatch(boardModel.events.reset());
+                    dispatch(boardModel.actions.reset());
                     toggle();
                 }}
                 type='transparent'

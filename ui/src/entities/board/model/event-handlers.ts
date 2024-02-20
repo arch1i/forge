@@ -1,89 +1,76 @@
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
-import { ModelState } from './types/state';
-import { PointerPosition } from './types/action-payloads';
 import { isElementValid } from '../lib/is-element-valid';
 import { initialState } from './initial-state';
+import { type ModelState } from './types/state';
+import { type Pointer } from '~/entities/pointer';
+import { type ComputedPosition } from '~/shared/types/core/view';
 
-const pointerPositionChanged: CaseReducer<ModelState, PayloadAction<PointerPosition>> = (
-    state,
-    action,
-) => {
-    const { pointer, elements } = state;
-    const { clientX, clientY, targetRect } = action.payload;
+const resizeElement: CaseReducer<
+    ModelState,
+    PayloadAction<{ computedPosition: ComputedPosition; pointer: Pointer }>
+> = (state, action) => {
+    const { elements } = state;
+    const { computedPosition, pointer } = action.payload;
 
-    if (pointer.status === 'drafting-an-element' && pointer.drafting) {
-        const key = pointer.drafting?.elementKey;
+    if (pointer.state['drafting-an-element']) {
+        const { x: initX, y: initY } = pointer.state['drafting-an-element'].initialComputedPosition;
+        const key = pointer.state['drafting-an-element']?.elementKey;
         const element = elements.find((el) => el.uniqueKey === key);
-        const { x: initX, y: initY } = pointer.drafting.initialComputedPosition;
-
-        const computed = {
-            x: clientX - targetRect.x,
-            y: clientY - targetRect.y,
-        };
 
         if (isNaN(initX) || isNaN(initY) || !element) return;
 
         element.size = {
-            width: Math.abs(initX - computed.x),
-            height: Math.abs(initY - computed.y),
+            width: Math.abs(initX - computedPosition.x),
+            height: Math.abs(initY - computedPosition.y),
         };
 
         element.position = {
-            x: initX < computed.x ? element.position.x : computed.x,
-            y: initY < computed.y ? element.position.y : computed.y,
+            x: initX < computedPosition.x ? element.position.x : computedPosition.x,
+            y: initY < computedPosition.y ? element.position.y : computedPosition.y,
         };
     }
 };
-const pointerDown: CaseReducer<ModelState, PayloadAction<PointerPosition>> = (state, action) => {
-    const { clientX, clientY, targetRect } = action.payload;
-    const computed = {
-        x: clientX - targetRect.x,
-        y: clientY - targetRect.y,
-    };
 
-    const uniqueKey = crypto.randomUUID();
+const createElement: CaseReducer<
+    ModelState,
+    PayloadAction<{ computedPosition: ComputedPosition; pointer: Pointer; uniqueKey: UniqueKey }>
+> = (state, action) => {
+    const { computedPosition, pointer, uniqueKey } = action.payload;
+
+    if (pointer.mode === 'default') return;
 
     state.elements.push({
         uniqueKey,
         position: {
-            x: computed.x,
-            y: computed.y,
+            x: computedPosition.x,
+            y: computedPosition.y,
         },
         size: {
             width: 1,
             height: 1,
         },
-        type: 'rect',
+        type: pointer.mode,
         styles: {
-            color: 'cyan',
+            color: pointer.styling[pointer.mode].strokeColor,
         },
     });
-    state.pointer = {
-        status: 'drafting-an-element',
-        drafting: {
-            elementKey: uniqueKey,
-            initialComputedPosition: {
-                x: computed.x,
-                y: computed.y,
-            },
-        },
-    };
 };
 
-const pointerUp: CaseReducer<ModelState> = (state) => {
-    const { elements, pointer } = state;
-    const key = pointer.drafting?.elementKey;
-    const index = elements.findIndex((el) => el.uniqueKey === key);
-    const draftedElement = elements[index];
+const validateElement: CaseReducer<
+    ModelState,
+    PayloadAction<{ elementKey: UniqueKey | undefined }>
+> = (state, action) => {
+    const { elements } = state;
+    const { elementKey } = action.payload;
 
-    if (!isElementValid(draftedElement)) {
-        elements.splice(index, 1);
+    if (elementKey) {
+        const index = elements.findIndex((el) => el.uniqueKey === elementKey);
+        const draftedElement = elements[index];
+
+        if (!isElementValid(draftedElement)) {
+            elements.splice(index, 1);
+        }
     }
-
-    state.pointer = {
-        status: 'idle',
-        drafting: undefined,
-    };
 };
 
 const reset: CaseReducer<ModelState> = () => {
@@ -91,8 +78,8 @@ const reset: CaseReducer<ModelState> = () => {
 };
 
 export const handlers = {
-    pointerDown,
-    pointerUp,
-    pointerPositionChanged,
+    createElement,
+    validateElement,
+    resizeElement,
     reset,
 };
