@@ -1,19 +1,19 @@
-import { events } from '../model/model';
+import { model } from '../model/model';
 import { useAppDispatch } from '~/app/store/hooks';
 import { Container } from './container';
 import { Element } from './element';
-import { useShapes } from '../model/selectors';
+import { useElements } from '../model/selectors';
 
 export const Board = () => {
     const dispatch = useAppDispatch();
-    const elements = useShapes();
+    const elements = useElements();
 
     return (
         <Container
             onPointerDown={(ev) => {
                 const { x, y } = ev.currentTarget.getBoundingClientRect();
                 dispatch(
-                    events.pointerDown({
+                    model.actions.pointerDown({
                         clientX: ev.clientX,
                         clientY: ev.clientY,
                         targetRect: { x, y },
@@ -21,12 +21,12 @@ export const Board = () => {
                 );
             }}
             onPointerUp={() => {
-                dispatch(events.pointerUp());
+                dispatch(model.actions.pointerUp());
             }}
             onPointerMove={(ev) => {
                 const { x, y } = ev.currentTarget.getBoundingClientRect();
                 dispatch(
-                    events.pointerPositionChanged({
+                    model.actions.pointerPositionChanged({
                         clientX: ev.clientX,
                         clientY: ev.clientY,
                         targetRect: { x, y },

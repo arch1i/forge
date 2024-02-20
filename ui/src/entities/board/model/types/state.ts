@@ -2,7 +2,7 @@ import { Position } from '~/shared/types/core/view';
 import { type Element } from './element';
 
 export interface ModelState {
-    shapes: Array<Element>;
+    elements: Array<Element>;
     pointer: Pointer;
 }
 

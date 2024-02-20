@@ -1,9 +1,12 @@
 import * as subscribes from './model/selectors';
-import { events, kernel } from './model/model';
+import { model } from './model/model';
 
 // model
 export const boardModel = {
-    events,
+    actions: model.actions,
     subscribes,
-    kernel,
-} satisfies Model;
+    kernel: {
+        name: model.name,
+        reducer: model.reducer,
+    },
+};

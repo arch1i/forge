@@ -8,12 +8,12 @@ const pointerPositionChanged: CaseReducer<ModelState, PayloadAction<PointerPosit
     state,
     action,
 ) => {
-    const { pointer, shapes } = state;
+    const { pointer, elements } = state;
     const { clientX, clientY, targetRect } = action.payload;
 
     if (pointer.status === 'drafting-an-element' && pointer.drafting) {
         const key = pointer.drafting?.elementKey;
-        const element = shapes.find((el) => el.uniqueKey === key);
+        const element = elements.find((el) => el.uniqueKey === key);
         const { x: initX, y: initY } = pointer.drafting.initialComputedPosition;
 
         const computed = {
@@ -43,7 +43,7 @@ const pointerDown: CaseReducer<ModelState, PayloadAction<PointerPosition>> = (st
 
     const uniqueKey = crypto.randomUUID();
 
-    state.shapes.push({
+    state.elements.push({
         uniqueKey,
         position: {
             x: computed.x,
@@ -71,13 +71,13 @@ const pointerDown: CaseReducer<ModelState, PayloadAction<PointerPosition>> = (st
 };
 
 const pointerUp: CaseReducer<ModelState> = (state) => {
-    const { shapes, pointer } = state;
+    const { elements, pointer } = state;
     const key = pointer.drafting?.elementKey;
-    const index = shapes.findIndex((el) => el.uniqueKey === key);
-    const draftedElement = shapes[index];
+    const index = elements.findIndex((el) => el.uniqueKey === key);
+    const draftedElement = elements[index];
 
     if (!isElementValid(draftedElement)) {
-        shapes.splice(index, 1);
+        elements.splice(index, 1);
     }
 
     state.pointer = {
