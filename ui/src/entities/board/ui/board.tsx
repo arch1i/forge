@@ -1,11 +1,12 @@
-import { events, subscribes } from '../model';
+import { events } from '../model/model';
 import { useAppDispatch } from '~/app/store/hooks';
 import { Container } from './container';
 import { Element } from './element';
+import { useShapes } from '../model/selectors';
 
 export const Board = () => {
     const dispatch = useAppDispatch();
-    const elements = subscribes.useShapes();
+    const elements = useShapes();
 
     return (
         <Container
@@ -15,7 +16,7 @@ export const Board = () => {
                     events.pointerDown({
                         clientX: ev.clientX,
                         clientY: ev.clientY,
-                        currentTargetRect: { x, y },
+                        targetRect: { x, y },
                     }),
                 );
             }}
@@ -28,7 +29,7 @@ export const Board = () => {
                     events.pointerPositionChanged({
                         clientX: ev.clientX,
                         clientY: ev.clientY,
-                        currentTargetRect: { x, y },
+                        targetRect: { x, y },
                     }),
                 );
             }}

@@ -1,10 +1,10 @@
-import { subscribes } from '../model';
+import { usePointerStatus } from '../model/selectors';
 import { type Element as ElementInterface } from '../model/types/element';
 
 interface Params extends OmitStrict<ElementInterface, 'uniqueKey'> {}
 
 export const Element = ({ position, size }: Params) => {
-    const pointer = subscribes.usePointerStatus();
+    const pointer = usePointerStatus();
 
     return (
         <div

@@ -1,4 +1,4 @@
-import { MIN_ELEMENT_SIZE } from '../model/constants';
+import { MIN_ELEMENT_SIZE } from '../config/constants';
 import { Element } from '../model/types/element';
 
 export function isElementValid(element: Element) {
