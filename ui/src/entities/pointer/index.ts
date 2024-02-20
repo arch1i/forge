@@ -1,8 +1,10 @@
 import { actions, model } from './model/model';
+import * as selectors from './model/selectors';
 
 // model
 export const pointerModel = {
     actions,
+    selectors,
     kernel: {
         name: model.name,
         reducer: model.reducer,
