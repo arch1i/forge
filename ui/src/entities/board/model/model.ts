@@ -43,8 +43,7 @@ on({
 
         if (pointer.info['drafting-an-element']?.mode === 'resizing') {
             dispatch(model.actions.resizeElement({ computedPosition, pointer }));
-        }
-        if (pointer.info['drafting-an-element']?.mode === 'moving') {
+        } else if (pointer.info['drafting-an-element']?.mode === 'moving') {
             dispatch(model.actions.moveElement({ computedPosition, pointer }));
         }
     },
