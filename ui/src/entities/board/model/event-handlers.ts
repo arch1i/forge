@@ -13,20 +13,21 @@ const resizeElement: CaseReducer<
     const { computedPosition, pointer } = action.payload;
 
     if (pointer.info['drafting-an-element']) {
-        const { x: initX, y: initY } = pointer.info['drafting-an-element'].initialComputedPosition;
+        const initPointer = pointer.info['drafting-an-element'].initialPointerPosition;
+
         const key = pointer.info['drafting-an-element']?.elementKey;
         const element = elements.find((el) => el.uniqueKey === key);
 
-        if (isNaN(initX) || isNaN(initY) || !element) return;
+        if (!initPointer || !element) return;
 
         element.size = {
-            width: Math.abs(initX - computedPosition.x),
-            height: Math.abs(initY - computedPosition.y),
+            width: Math.abs(initPointer.x - computedPosition.x),
+            height: Math.abs(initPointer.y - computedPosition.y),
         };
 
         element.position = {
-            x: initX < computedPosition.x ? element.position.x : computedPosition.x,
-            y: initY < computedPosition.y ? element.position.y : computedPosition.y,
+            x: initPointer.x < computedPosition.x ? element.position.x : computedPosition.x,
+            y: initPointer.y < computedPosition.y ? element.position.y : computedPosition.y,
         };
     }
 };
@@ -64,26 +65,17 @@ const moveElement: CaseReducer<
     const { computedPosition, pointer } = action.payload;
 
     if (pointer.info['drafting-an-element']) {
+        const initPointer = pointer.info['drafting-an-element'].initialPointerPosition;
+        const initElement = pointer.info['drafting-an-element'].initialElementPosition;
+
         const key = pointer.info['drafting-an-element']?.elementKey;
         const element = elements.find((el) => el.uniqueKey === key);
 
-        if (!element) return;
-
-        // wrong - computed is always new value.
-        // so it is not the way to calculate difference
-
-        // diff between prev and currComputed pos is needed;
-
-        const diff = {
-            x: element.position.x - computedPosition.x,
-            y: element.position.y - computedPosition.y,
-        };
-
-        console.log(diff.x);
+        if (!initElement || !initPointer || !element) return;
 
         element.position = {
-            x: element.position.x + (computedPosition.x - element.position.x + diff.x),
-            y: element.position.y + (computedPosition.y - element.position.y + diff.y),
+            x: initElement.x + (computedPosition.x - initPointer.x),
+            y: initElement.y + (computedPosition.y - initPointer.y),
         };
     }
 };

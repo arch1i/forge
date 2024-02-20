@@ -13,8 +13,9 @@ export type Pointer = {
 type Info = {
     'drafting-an-element'?: {
         mode: DraftingMode;
-        initialComputedPosition: ComputedPosition;
         elementKey: UniqueKey;
+        initialPointerPosition?: ComputedPosition;
+        initialElementPosition?: ComputedPosition;
     };
 };
 

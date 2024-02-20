@@ -27,7 +27,7 @@ on({
         dispatch(model.actions.createElement({ pointer, computedPosition, uniqueKey }));
         dispatch(
             pointerModel.actions.startDrafting({
-                computedPosition,
+                initialPointerPosition: computedPosition,
                 uniqueKey,
                 draftingMode: 'resizing',
             }),

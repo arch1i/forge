@@ -1,6 +1,6 @@
+import { useAppDispatch } from '~/app/store/hooks';
 import { pointerModel } from '~/entities/pointer';
 import { type Element as ElementInterface } from '../model/types/element';
-import { useAppDispatch } from '~/app/store/hooks';
 import { type MouseEventHandler } from 'react';
 
 interface Params extends ElementInterface {}
@@ -14,7 +14,11 @@ export const Element = ({ position, size, uniqueKey }: Params) => {
         dispatch(
             pointerModel.actions.elementDragged({
                 uniqueKey,
-                computedPosition: position,
+                initialElementPosition: position,
+                initialPointerPosition: {
+                    x: ev.clientX,
+                    y: ev.clientY,
+                },
             }),
         );
     };

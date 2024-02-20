@@ -18,7 +18,11 @@ export const model = createSlice({
 
         elementDragged: (
             state,
-            action: PayloadAction<{ computedPosition: ComputedPosition; uniqueKey: UniqueKey }>,
+            action: PayloadAction<{
+                uniqueKey: UniqueKey;
+                initialPointerPosition: ComputedPosition;
+                initialElementPosition: ComputedPosition;
+            }>,
         ) => {
             handlers.startDrafting(state, {
                 payload: { ...action.payload, draftingMode: 'moving' },

@@ -5,18 +5,21 @@ import { type ComputedPosition } from '~/shared/types/core/view';
 const startDrafting: CaseReducer<
     Pointer,
     PayloadAction<{
-        computedPosition: ComputedPosition;
         uniqueKey: UniqueKey;
         draftingMode: DraftingMode;
+        initialPointerPosition?: ComputedPosition;
+        initialElementPosition?: ComputedPosition;
     }>
 > = (state, action) => {
-    const { uniqueKey, computedPosition, draftingMode } = action.payload;
+    const { uniqueKey, initialPointerPosition, draftingMode, initialElementPosition } =
+        action.payload;
 
     state.status = 'drafting-an-element';
     state.info['drafting-an-element'] = {
         mode: draftingMode,
         elementKey: uniqueKey,
-        initialComputedPosition: computedPosition,
+        initialPointerPosition,
+        initialElementPosition,
     };
 };
 
