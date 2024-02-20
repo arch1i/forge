@@ -7,15 +7,18 @@ export type Pointer = {
 
     status: 'idle' | 'drafting-an-element';
 
-    state: State;
+    info: Info;
 };
 
-type State = {
+type Info = {
     'drafting-an-element'?: {
+        mode: DraftingMode;
         initialComputedPosition: ComputedPosition;
         elementKey: UniqueKey;
     };
 };
+
+export type DraftingMode = 'resizing' | 'moving';
 
 type Styling = {
     rect: {

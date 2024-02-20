@@ -10,6 +10,7 @@ export const model = createSlice({
     reducers: {
         createElement: handlers.createElement,
         resizeElement: handlers.resizeElement,
+        moveElement: handlers.moveElement,
         validateElement: handlers.validateElement,
 
         reset: handlers.reset,
@@ -24,7 +25,13 @@ on({
         const uniqueKey = crypto.randomUUID();
 
         dispatch(model.actions.createElement({ pointer, computedPosition, uniqueKey }));
-        dispatch(pointerModel.actions.startDrafting({ computedPosition, uniqueKey }));
+        dispatch(
+            pointerModel.actions.startDrafting({
+                computedPosition,
+                uniqueKey,
+                draftingMode: 'resizing',
+            }),
+        );
     },
 });
 
@@ -32,10 +39,13 @@ on({
     actionCreator: pointerModel.actions.moved,
     effect: ({ payload: position }, { dispatch, getState }) => {
         const { pointer } = getState();
+        const computedPosition = getComputedPointerPosition(position);
 
-        if (pointer.status === 'drafting-an-element') {
-            const computedPosition = getComputedPointerPosition(position);
+        if (pointer.info['drafting-an-element']?.mode === 'resizing') {
             dispatch(model.actions.resizeElement({ computedPosition, pointer }));
+        }
+        if (pointer.info['drafting-an-element']?.mode === 'moving') {
+            dispatch(model.actions.moveElement({ computedPosition, pointer }));
         }
     },
 });
@@ -47,10 +57,9 @@ on({
 
         dispatch(
             model.actions.validateElement({
-                elementKey: pointer.state['drafting-an-element']?.elementKey,
+                elementKey: pointer.info['drafting-an-element']?.elementKey,
             }),
         );
-
         dispatch(pointerModel.actions.stopDrafting());
     },
 });

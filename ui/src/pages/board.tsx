@@ -1,4 +1,4 @@
-import { Board } from '~/widgets/board/main';
+import { Board } from '~/widgets/board/board';
 
 export default function BoardPage() {
     return <Board />;

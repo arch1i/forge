@@ -7,7 +7,7 @@ import { appRouter } from './router/config';
 
 import './styles/index.css';
 
-const ComposedApp = withProviders(() => <RouterProvider router={appRouter()} />);
+export const ComposedApp = withProviders(() => <RouterProvider router={appRouter()} />);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <StrictMode>

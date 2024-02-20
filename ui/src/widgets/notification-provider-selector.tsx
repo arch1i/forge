@@ -5,7 +5,7 @@ import { NotificationProvider } from '@prisma/client';
 
 import { type RadioOptions } from '~/shared/ui/radio';
 
-export const OPTIONS = [
+const OPTIONS = [
     { value: NotificationProvider.TELEGRAM, icon: 'telegram', iconSection: 'social-media' },
     {
         value: NotificationProvider.WHATSAPP,

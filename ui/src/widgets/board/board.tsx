@@ -9,6 +9,7 @@ export const Board = () => {
     const elements = boardModel.subscribes.useElements();
 
     const handlePointerDown: PointerEventHandler = (ev) => {
+        console.log('click on board');
         const { x, y } = ev.currentTarget.getBoundingClientRect();
         dispatch(
             pointerModel.actions.down({
@@ -19,7 +20,9 @@ export const Board = () => {
         );
     };
 
-    const handlePointerUp = () => dispatch(pointerModel.actions.up());
+    const handlePointerUp: PointerEventHandler = () => {
+        dispatch(pointerModel.actions.up());
+    };
 
     const handlePointerMove: PointerEventHandler = (ev) => {
         const { x, y } = ev.currentTarget.getBoundingClientRect();
@@ -42,6 +45,7 @@ export const Board = () => {
                 return (
                     <Element
                         key={el.uniqueKey}
+                        uniqueKey={el.uniqueKey}
                         type={el.type}
                         position={el.position}
                         size={el.size}

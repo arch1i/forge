@@ -9,7 +9,7 @@ export const Loader = ({
     return <div className={twMerge(styles({ size, color }), className)} />;
 };
 
-export const styles = cva(
+const styles = cva(
     'animate-spin inline-block self-center border-current border-t-transparent rounded-full m-0',
     {
         variants: {
