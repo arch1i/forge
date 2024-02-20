@@ -1,11 +1,11 @@
-import { Position } from '~/shared/types/core/view';
+import { ComputedPosition } from '~/shared/types/core/view';
 
 export type Element = {
     uniqueKey: UniqueKey;
 
     type: ElementType;
 
-    position: Position;
+    position: ComputedPosition;
     size: Size;
 
     styles: Styles;

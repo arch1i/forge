@@ -1,4 +1,4 @@
-import { Board } from '~/entities/board/ui/board';
+import { Board } from '~/widgets/board/main';
 
 export default function BoardPage() {
     return <Board />;
