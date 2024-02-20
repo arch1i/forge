@@ -50,6 +50,7 @@ on({
                 elementKey: pointer.state['drafting-an-element']?.elementKey,
             }),
         );
+
         dispatch(pointerModel.actions.stopDrafting());
     },
 });
