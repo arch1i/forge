@@ -13,13 +13,14 @@ export const Element = ({ position, size, uniqueKey, type }: Params) => {
     const handleDrag: MouseEventHandler = (ev) => {
         ev.stopPropagation();
         dispatch(
-            pointerModel.actions.elementDragged({
+            pointerModel.actions.startDrafting({
                 uniqueKey,
                 initialElementPosition: position,
                 initialPointerPosition: {
                     x: ev.clientX,
                     y: ev.clientY,
                 },
+                draftingMode: 'moving',
             }),
         );
     };

@@ -1,1 +1,1 @@
-export const MIN_ELEMENT_SIZE = 25;
+export const MIN_ELEMENT_SIZE = 15;
