@@ -1,16 +1,17 @@
-import { type Pointer } from '~/entities/pointer';
 import { type ComputedPointerPosition } from '~/shared/types/core/view';
 
 export type Element = {
     uniqueKey: UniqueKey;
 
-    type: ExcludeStrict<TypeOfValue<Pointer, 'mode'>, 'default'>;
+    type: ElementType;
 
     position: ComputedPointerPosition;
     size: Size;
 
     styles: Styles;
 };
+
+export type ElementType = 'rect';
 
 type Size = {
     width: number;

@@ -16,3 +16,6 @@ export { Element } from './ui/element';
 
 // lib
 export { getCursorStyle } from './lib/get-cursor-style';
+
+// types
+export { type ElementType } from './model/types/element';

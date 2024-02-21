@@ -1,14 +1,15 @@
-import { ComputedPointerPosition } from '~/shared/types/core/view';
+import { type ElementType } from '~/entities/board';
+import { type ComputedPointerPosition } from '~/shared/types/core/view';
 
 export type Pointer = {
-    mode: 'default' | 'rect';
+    mode: 'default' | ElementType;
+    status: 'idle' | 'drafting-an-element';
+    info: Info;
 
     styling: Styling;
-
-    status: 'idle' | 'drafting-an-element';
-
-    info: Info;
 };
+
+export type DraftingMode = 'resizing' | 'moving';
 
 type Info = {
     'drafting-an-element'?: {
@@ -19,10 +20,4 @@ type Info = {
     };
 };
 
-export type DraftingMode = 'resizing' | 'moving';
-
-type Styling = {
-    rect: {
-        strokeColor: string;
-    };
-};
+type Styling = Record<ElementType, any>;
