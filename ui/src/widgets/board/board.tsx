@@ -1,11 +1,13 @@
 import { useAppDispatch } from '~/app/store/hooks';
-import { Container } from './container';
-import { boardModel, Element } from '~/entities/board';
+import { boardModel, Element, getCursorStyle } from '~/entities/board';
 import { pointerModel } from '~/entities/pointer';
-import { PointerEventHandler } from 'react';
+import { PointerEventHandler, useRef } from 'react';
 
 export const Board = () => {
     const dispatch = useAppDispatch();
+    const nodeRef = useRef<HTMLDivElement | null>(null);
+
+    const draftingMode = pointerModel.selectors.useDraftingMode();
     const elements = boardModel.subscribes.useElements();
 
     const handlePointerDown: PointerEventHandler = (ev) => {
@@ -35,14 +37,18 @@ export const Board = () => {
     };
 
     return (
-        <Container
+        <div
+            ref={nodeRef}
+            className='relative w-[100vw] h-[100vh] overflow-hidden'
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerMove={handlePointerMove}
+            style={{ cursor: getCursorStyle({ element: 'board', draftingMode }) }}
         >
             {elements.map((el) => {
                 return (
                     <Element
+                        boardNodeRef={nodeRef}
                         key={el.uniqueKey}
                         uniqueKey={el.uniqueKey}
                         type={el.type}
@@ -52,6 +58,6 @@ export const Board = () => {
                     />
                 );
             })}
-        </Container>
+        </div>
     );
 };
