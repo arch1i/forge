@@ -1,4 +1,4 @@
-import { ComputedPosition } from '~/shared/types/core/view';
+import { ComputedPointerPosition } from '~/shared/types/core/view';
 
 export type Pointer = {
     mode: 'default' | 'rect';
@@ -14,8 +14,8 @@ type Info = {
     'drafting-an-element'?: {
         mode: DraftingMode;
         elementKey: UniqueKey;
-        initialPointerPosition?: ComputedPosition;
-        initialElementPosition?: ComputedPosition;
+        initialPointerPosition?: ComputedPointerPosition;
+        initialElementPosition?: ComputedPointerPosition;
     };
 };
 

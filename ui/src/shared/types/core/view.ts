@@ -1,4 +1,4 @@
-export type ComputedPosition = {
+export type ComputedPointerPosition = {
     x: number;
     y: number;
 };

@@ -1,14 +1,14 @@
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { DraftingMode, type Pointer } from './types/state';
-import { type ComputedPosition } from '~/shared/types/core/view';
+import { type ComputedPointerPosition } from '~/shared/types/core/view';
 
 const startDrafting: CaseReducer<
     Pointer,
     PayloadAction<{
         uniqueKey: UniqueKey;
         draftingMode: DraftingMode;
-        initialPointerPosition?: ComputedPosition;
-        initialElementPosition?: ComputedPosition;
+        initialPointerPosition?: ComputedPointerPosition;
+        initialElementPosition?: ComputedPointerPosition;
     }>
 > = (state, action) => {
     const { uniqueKey, initialPointerPosition, draftingMode, initialElementPosition } =

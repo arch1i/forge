@@ -3,11 +3,11 @@ import { isElementValid } from '../lib/is-element-valid';
 import { initialState } from './initial-state';
 import { type ModelState } from './types/state';
 import { type Pointer } from '~/entities/pointer';
-import { type ComputedPosition } from '~/shared/types/core/view';
+import { type ComputedPointerPosition } from '~/shared/types/core/view';
 
 const resizeElement: CaseReducer<
     ModelState,
-    PayloadAction<{ computedPosition: ComputedPosition; pointer: Pointer }>
+    PayloadAction<{ computedPosition: ComputedPointerPosition; pointer: Pointer }>
 > = (state, action) => {
     const { elements } = state;
     const { computedPosition, pointer } = action.payload;
@@ -34,7 +34,11 @@ const resizeElement: CaseReducer<
 
 const createElement: CaseReducer<
     ModelState,
-    PayloadAction<{ computedPosition: ComputedPosition; pointer: Pointer; uniqueKey: UniqueKey }>
+    PayloadAction<{
+        computedPosition: ComputedPointerPosition;
+        pointer: Pointer;
+        uniqueKey: UniqueKey;
+    }>
 > = (state, action) => {
     const { computedPosition, pointer, uniqueKey } = action.payload;
 
@@ -59,7 +63,7 @@ const createElement: CaseReducer<
 
 const moveElement: CaseReducer<
     ModelState,
-    PayloadAction<{ computedPosition: ComputedPosition; pointer: Pointer }>
+    PayloadAction<{ computedPosition: ComputedPointerPosition; pointer: Pointer }>
 > = (state, action) => {
     const { elements } = state;
     const { computedPosition, pointer } = action.payload;
