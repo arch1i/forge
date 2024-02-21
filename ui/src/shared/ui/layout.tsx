@@ -27,7 +27,7 @@ export function Layout({ isAppLoading, appMenuButtonSlot }: Props) {
                         </section>
                     )}
 
-                    <section className='z-0 bg-white'>
+                    <section className='z-0'>
                         <Outlet />
                     </section>
 

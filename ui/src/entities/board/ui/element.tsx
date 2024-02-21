@@ -2,12 +2,13 @@ import { useAppDispatch } from '~/app/store/hooks';
 import { pointerModel } from '~/entities/pointer';
 import { type Element as ElementInterface } from '../model/types/element';
 import { type MouseEventHandler } from 'react';
+import { getCursorStyle } from '../lib/get-cursor-style';
 
 interface Params extends ElementInterface {}
 
-export const Element = ({ position, size, uniqueKey }: Params) => {
+export const Element = ({ position, size, uniqueKey, type }: Params) => {
     const dispatch = useAppDispatch();
-    const pointer = pointerModel.selectors.usePointerStatus();
+    const draftingMode = pointerModel.selectors.useDraftingMode();
 
     const handleDrag: MouseEventHandler = (ev) => {
         ev.stopPropagation();
@@ -25,15 +26,15 @@ export const Element = ({ position, size, uniqueKey }: Params) => {
 
     return (
         <div
+            onPointerDown={handleDrag}
             style={{
                 position: 'absolute',
                 top: `${position.y}px`,
                 left: `${position.x}px`,
                 width: `${size.width}px`,
                 height: `${size.height}px`,
-                cursor: pointer === 'drafting-an-element' ? 'crosshair' : 'grab',
+                cursor: getCursorStyle({ element: type, draftingMode }),
             }}
-            onPointerDown={handleDrag}
             className='rounded-[20px] border-2 border-[#366fbc]'
         />
     );

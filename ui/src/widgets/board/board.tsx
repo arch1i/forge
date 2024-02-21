@@ -9,7 +9,6 @@ export const Board = () => {
     const elements = boardModel.subscribes.useElements();
 
     const handlePointerDown: PointerEventHandler = (ev) => {
-        console.log('click on board');
         const { x, y } = ev.currentTarget.getBoundingClientRect();
         dispatch(
             pointerModel.actions.down({

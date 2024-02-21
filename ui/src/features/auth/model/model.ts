@@ -61,7 +61,6 @@ const authModel = createSlice({
         // check-session
         builder.addCase(defineSession.pending, (state, { meta }) => {
             state.effects.checkSession.status = meta.requestStatus;
-            console.log(meta.requestStatus, 'define-session');
         });
 
         builder.addCase(defineSession.fulfilled, (state, { meta }) => {
@@ -70,7 +69,6 @@ const authModel = createSlice({
 
         builder.addCase(defineSession.rejected, (state, { meta }) => {
             state.effects.checkSession.status = meta.requestStatus;
-            console.log(meta.requestStatus, 'define-session');
         });
 
         // login
