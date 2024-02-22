@@ -17,7 +17,6 @@ export const Element = ({ position, size, uniqueKey, type, boardNodeRef }: Param
 
         if (!boardNodeRef?.current) return;
         const boardRect = boardNodeRef.current?.getBoundingClientRect();
-        console.log(boardRect);
         const computedPointerPosition = getComputedPointerPosition({
             clientX: ev.clientX,
             clientY: ev.clientY,
