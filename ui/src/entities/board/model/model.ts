@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './initial-state';
 import { handlers } from './event-handlers';
 import { on } from '~/app/store/middleware';
-import { getComputedPointerPosition, pointerModel } from '~/entities/pointer';
+import { pointerModel } from '~/entities/pointer';
 
 export const model = createSlice({
     name: 'board',
@@ -19,32 +19,43 @@ export const model = createSlice({
 
 on({
     actionCreator: pointerModel.actions.down,
-    effect: ({ payload: position }, { dispatch, getState }) => {
+    effect: ({ payload: event }, { dispatch, getState }) => {
         const { pointer } = getState();
-        const computedPosition = getComputedPointerPosition(position);
         const uniqueKey = crypto.randomUUID();
+        const keyTouchPosition = event.touchPoints[0];
 
-        dispatch(model.actions.createElement({ pointer, computedPosition, uniqueKey }));
-        dispatch(
-            pointerModel.actions.startDrafting({
-                initialPointerPosition: computedPosition,
-                uniqueKey,
-                draftingMode: 'resizing',
-            }),
-        );
+        if (event.touchPoints.length === 1) {
+            dispatch(
+                model.actions.createElement({
+                    pointer,
+                    computedPosition: keyTouchPosition,
+                    uniqueKey,
+                }),
+            );
+            dispatch(
+                pointerModel.actions.startDrafting({
+                    initialPointerPosition: keyTouchPosition,
+                    uniqueKey,
+                    draftingMode: 'resizing',
+                }),
+            );
+        }
     },
 });
 
 on({
     actionCreator: pointerModel.actions.moved,
-    effect: ({ payload: position }, { dispatch, getState }) => {
+    effect: ({ payload: event }, { dispatch, getState }) => {
+        if (event.touchPoints.length > 1) return;
+
         const { pointer } = getState();
-        const computedPosition = getComputedPointerPosition(position);
+        const keyTouchPosition = event.touchPoints[0];
 
         if (pointer.info['drafting-an-element']?.mode === 'resizing') {
-            dispatch(model.actions.resizeElement({ computedPosition, pointer }));
+            dispatch(model.actions.resizeElement({ computedPosition: keyTouchPosition, pointer }));
         } else if (pointer.info['drafting-an-element']?.mode === 'moving') {
-            dispatch(model.actions.moveElement({ computedPosition, pointer }));
+            console.log('here');
+            dispatch(model.actions.moveElement({ computedPosition: keyTouchPosition, pointer }));
         }
     },
 });
@@ -53,7 +64,6 @@ on({
     actionCreator: pointerModel.actions.up,
     effect: (_, { dispatch, getState }) => {
         const { pointer } = getState();
-
         dispatch(
             model.actions.validateElement({
                 elementKey: pointer.info['drafting-an-element']?.elementKey,

@@ -1,4 +1,4 @@
-import { type ComputedPointerPosition } from '~/shared/types/core/view';
+import { type ComputedPointerPosition } from '~/entities/pointer/model/types/core';
 
 export type Element = {
     uniqueKey: UniqueKey;

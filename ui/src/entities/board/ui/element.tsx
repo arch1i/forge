@@ -1,7 +1,7 @@
 import { useAppDispatch } from '~/app/store/hooks';
-import { getComputedPointerPosition, pointerModel } from '~/entities/pointer';
+import { getComputedPosition, pointerModel } from '~/entities/pointer';
 import { type Element as ElementInterface } from '../model/types/element';
-import { type MouseEventHandler, type RefObject } from 'react';
+import { TouchEventHandler, type MouseEventHandler, type RefObject } from 'react';
 import { getCursorStyle } from '../lib/get-cursor-style';
 
 interface Params extends ElementInterface {
@@ -12,18 +12,34 @@ export const Element = ({ position, size, uniqueKey, type, boardNodeRef }: Param
     const dispatch = useAppDispatch();
     const draftingMode = pointerModel.selectors.useDraftingMode();
 
-    const handleDrag: MouseEventHandler = (ev) => {
+    const handleMouseDrag: MouseEventHandler = (ev) => {
         ev.stopPropagation();
-
         if (!boardNodeRef?.current) return;
-        const boardRect = boardNodeRef.current?.getBoundingClientRect();
-        const computedPointerPosition = getComputedPointerPosition({
+
+        const computedPointerPosition = getComputedPosition({
             clientX: ev.clientX,
             clientY: ev.clientY,
-            targetRect: {
-                x: boardRect.x,
-                y: boardRect.y,
-            },
+            targetRect: boardNodeRef.current.getBoundingClientRect(),
+        });
+
+        dispatch(
+            pointerModel.actions.startDrafting({
+                uniqueKey,
+                initialElementPosition: position,
+                initialPointerPosition: computedPointerPosition,
+                draftingMode: 'moving',
+            }),
+        );
+    };
+
+    const handleTouchDrag: TouchEventHandler = (ev) => {
+        ev.stopPropagation();
+        if (!boardNodeRef?.current) return;
+
+        const computedPointerPosition = getComputedPosition({
+            clientX: ev.touches[0].clientX,
+            clientY: ev.touches[0].clientY,
+            targetRect: boardNodeRef.current.getBoundingClientRect(),
         });
 
         dispatch(
@@ -38,11 +54,12 @@ export const Element = ({ position, size, uniqueKey, type, boardNodeRef }: Param
 
     return (
         <div
-            onPointerDown={handleDrag}
+            onMouseDown={handleMouseDrag}
+            onTouchStart={handleTouchDrag}
             style={{
                 position: 'absolute',
-                top: `${position.y}px`,
-                left: `${position.x}px`,
+                top: `${position.computedY}px`,
+                left: `${position.computedX}px`,
                 width: `${size.width}px`,
                 height: `${size.height}px`,
                 cursor: getCursorStyle({ element: type, draftingMode }),

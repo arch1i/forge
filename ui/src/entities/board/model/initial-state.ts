@@ -1,5 +1,5 @@
-import { ModelState } from './types/state';
+import { Board } from './types/state';
 
-export const initialState: ModelState = {
+export const initialState: Board = {
     elements: [],
 };

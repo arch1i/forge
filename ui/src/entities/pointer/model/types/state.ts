@@ -1,23 +1,19 @@
 import { type ElementType } from '~/entities/board';
-import { type ComputedPointerPosition } from '~/shared/types/core/view';
+import { type ComputedPointerPosition } from './core';
 
 export type Pointer = {
     mode: 'default' | ElementType;
     status: 'idle' | 'drafting-an-element';
-    info: Info;
+    info: {
+        'drafting-an-element'?: {
+            mode: DraftingMode;
+            elementKey: UniqueKey;
+            initialPointerPosition?: ComputedPointerPosition;
+            initialElementPosition?: ComputedPointerPosition;
+        };
+    };
 
-    styling: Styling;
+    styling: Record<ElementType, any>;
 };
 
 export type DraftingMode = 'resizing' | 'moving';
-
-type Info = {
-    'drafting-an-element'?: {
-        mode: DraftingMode;
-        elementKey: UniqueKey;
-        initialPointerPosition?: ComputedPointerPosition;
-        initialElementPosition?: ComputedPointerPosition;
-    };
-};
-
-type Styling = Record<ElementType, any>;

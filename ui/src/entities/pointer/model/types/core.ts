@@ -1,3 +1,8 @@
-export type PointerPosition = Pick<MouseEvent, 'clientX' | 'clientY'> & {
-    targetRect: Pick<DOMRect, 'x' | 'y'>;
+export type ComputedPointerPosition = {
+    computedX: number;
+    computedY: number;
+};
+
+export type PointerBaseEvent = {
+    touchPoints: Array<ComputedPointerPosition>;
 };

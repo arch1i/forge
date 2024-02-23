@@ -19,7 +19,7 @@ export function Layout({ isAppLoading, appMenuButtonSlot }: Props) {
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className='flex flex-row min-h-full relative font-sans'
+                    className='flex flex-row relative font-sans select-none'
                 >
                     {appMenuButtonSlot && (
                         <section className='z-50 absolute top-[1rem] left-[2.2%] md:left-[1.7%] lg:left-[1.3%]'>

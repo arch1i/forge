@@ -1,4 +1,4 @@
-import { Pointer } from './types/state';
+import { type Pointer } from './types/state';
 
 export const initialState: Pointer = {
     mode: 'rect',
