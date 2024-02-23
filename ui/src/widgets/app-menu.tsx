@@ -11,7 +11,13 @@ export const AppMenu = () => {
     return (
         <section className='relative'>
             <MenuButton
-                content={<Icon section='primary' name='menu' className='w-[17px] h-[17px]' />}
+                content={
+                    <Icon
+                        section='primary'
+                        name='menu'
+                        className='w-[24px] h-[22px] lg:w-[17px] lg:h-[17px]'
+                    />
+                }
                 onClick={toggle}
             />
             {isDropdownVisible && <Menu toggle={toggle} />}

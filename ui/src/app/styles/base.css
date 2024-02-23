@@ -37,15 +37,6 @@ select:-webkit-autofill:focus {
     font-size: 1rem;
 }
 
-body::-webkit-scrollbar {
-    width: 4px;
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 255, 0.622);
-    border-radius: 20px;
-}
-
 /* Normalize */
 
 *,
@@ -58,10 +49,8 @@ body::-webkit-scrollbar-thumb {
 *:focus {
     outline: none;
 }
-
-html,
-body {
-    touch-action: manipulation;
+html {
+    overflow: hidden;
 }
 
 body {
@@ -71,6 +60,7 @@ body {
     line-height: 1.5;
     overflow-anchor: none;
     margin: 0;
+    overflow: hidden;
 }
 
 ul[class],
