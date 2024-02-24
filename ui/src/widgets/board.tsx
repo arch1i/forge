@@ -1,7 +1,12 @@
 import { type TouchEventHandler, useRef, MouseEventHandler } from 'react';
 import { useAppDispatch } from '~/app/store/hooks';
 import { boardModel, Element, getCursorStyle } from '~/entities/board';
-import { getComputedPosition, getComputedTouchPositions, pointerModel } from '~/entities/pointer';
+import {
+    getComputedPosition,
+    getComputedTouchPositions,
+    isMainButtonPressed,
+    pointerModel,
+} from '~/entities/pointer';
 
 export const Board = () => {
     const dispatch = useAppDispatch();
@@ -13,9 +18,8 @@ export const Board = () => {
     // surface handlers
     const handleTouchStart: TouchEventHandler = (ev) => {
         ev.stopPropagation();
-        if (!nodeRef.current) return;
 
-        const boardRect = nodeRef.current?.getBoundingClientRect();
+        const boardRect = ev.currentTarget.getBoundingClientRect();
         const touchPoints = getComputedTouchPositions({ targetRect: boardRect, touches: ev.touches });
 
         dispatch(pointerModel.actions.down({ touchPoints }));
@@ -28,9 +32,8 @@ export const Board = () => {
 
     const handleTouchMove: TouchEventHandler = (ev) => {
         ev.stopPropagation();
-        if (!nodeRef.current) return;
 
-        const boardRect = nodeRef.current.getBoundingClientRect();
+        const boardRect = ev.currentTarget.getBoundingClientRect();
         const touchPoints = getComputedTouchPositions({ targetRect: boardRect, touches: ev.touches });
 
         dispatch(pointerModel.actions.moved({ touchPoints }));
@@ -39,6 +42,8 @@ export const Board = () => {
     // mouse handlers
     const handleMouseDown: MouseEventHandler = (ev) => {
         ev.stopPropagation();
+        if (!isMainButtonPressed(ev)) return;
+
         const boardRect = ev.currentTarget.getBoundingClientRect();
         const keyPoint = getComputedPosition({
             targetRect: boardRect,

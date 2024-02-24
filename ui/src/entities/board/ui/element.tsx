@@ -1,8 +1,8 @@
 import { useAppDispatch } from '~/app/store/hooks';
-import { getComputedPosition, pointerModel } from '~/entities/pointer';
-import { type Element as ElementInterface } from '../model/types/element';
-import { TouchEventHandler, type MouseEventHandler, type RefObject } from 'react';
+import { getComputedPosition, isMainButtonPressed, pointerModel } from '~/entities/pointer';
 import { getCursorStyle } from '../lib/get-cursor-style';
+import { type TouchEventHandler, type MouseEventHandler, type RefObject } from 'react';
+import { type Element as ElementInterface } from '../model/types/element';
 
 interface Params extends ElementInterface {
     boardNodeRef: RefObject<HTMLDivElement>;
@@ -14,7 +14,7 @@ export const Element = ({ position, size, uniqueKey, type, boardNodeRef }: Param
 
     const handleMouseDrag: MouseEventHandler = (ev) => {
         ev.stopPropagation();
-        if (!boardNodeRef?.current) return;
+        if (!boardNodeRef?.current || !isMainButtonPressed(ev)) return;
 
         const computedPointerPosition = getComputedPosition({
             clientX: ev.clientX,

@@ -10,37 +10,28 @@ interface Props extends VariantProps<typeof styles> {
     htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }
 
-export const MenuButton = (props: Props) => {
-    const { content, className, type, size, disabled = false, onClick, htmlType = 'button' } = props;
+export const SecondaryButton = (props: Props) => {
+    const { content, className, color, size, disabled = false, onClick, htmlType = 'button' } = props;
 
     return (
         <button
             disabled={disabled}
             onClick={onClick}
             type={htmlType}
-            className={twMerge(styles({ type, size, disabled }), className)}
+            className={twMerge(styles({ color, size, disabled }), className)}
         >
             {content}
         </button>
     );
 };
 
-const styles = cva('w-fit rounded-[4px] whitespace-nowrap tracking-wider font-sans', {
+const styles = cva('text-center w-fit rounded-[3px] whitespace-nowrap cursor-pointer', {
     variants: {
-        type: {
-            light: [
-                'text-[#1b1b1f] bg-[#ececf3] cursor-pointer flex items-center justify-center text-center',
-                'hover:bg-[#f1f0fe] active:outline active:outline-1 active:outline-[#4843b9]',
-            ],
-
-            transparent: [
-                'text-sm text-[#1b1b1f] bg-transparent cursor-pointer text-left',
-                'hover:bg-[#f1f0fe] active:outline active:outline-1 active:outline-[#4843b9]',
-            ],
+        color: {
+            blue: ['text-white bg-blue-600/90', 'hover:bg-blue-600/95 active:bg-blue-600'],
         },
         size: {
-            md: ['px-2 py-2'],
-            lg: ['px-[13px] py-[6px]'],
+            md: ['px-4 py-2 text-base'],
         },
         disabled: {
             true: [
@@ -51,9 +42,8 @@ const styles = cva('w-fit rounded-[4px] whitespace-nowrap tracking-wider font-sa
             ],
         },
     },
-
     defaultVariants: {
-        type: 'light',
+        color: 'blue',
         size: 'md',
     },
 });

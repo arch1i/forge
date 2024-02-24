@@ -3,14 +3,14 @@ import { useReducer } from 'react';
 import { useAppDispatch } from '~/app/store/hooks';
 import { boardModel } from '~/entities/board';
 import { Icon } from '~/shared/ui/icon';
-import { MenuButton } from '~/shared/ui/menu-button';
+import { PrimaryButton } from '~/shared/ui/primary-button';
 
 export const AppMenu = () => {
     const [isDropdownVisible, toggle] = useReducer((state) => !state, false);
 
     return (
         <section className='relative'>
-            <MenuButton
+            <PrimaryButton
                 content={
                     <Icon
                         section='primary'
@@ -20,17 +20,20 @@ export const AppMenu = () => {
                 }
                 onClick={toggle}
             />
-            {isDropdownVisible && <Menu toggle={toggle} />}
+            <Dropdown isVisible={isDropdownVisible} toggle={toggle} />
         </section>
     );
 };
 
-const Menu = ({ toggle }: { toggle: () => void }) => {
+const Dropdown = ({ toggle, isVisible }: { toggle: () => void; isVisible: boolean }) => {
     const dispatch = useAppDispatch();
 
     return (
-        <div className='bg-white shadow-box flex flex-col gap-y-[0.4rem] p-2 absolute top-10 left-0 rounded-[4px]'>
-            <MenuButton
+        <div
+            style={{ display: isVisible ? 'flex' : 'none' }}
+            className='bg-white shadow-box flex-col gap-y-[0.4rem] p-2 absolute top-10 left-0 rounded-[4px]'
+        >
+            <PrimaryButton
                 type='transparent'
                 size='lg'
                 disabled
@@ -46,7 +49,7 @@ const Menu = ({ toggle }: { toggle: () => void }) => {
                 }
                 className='w-full'
             />
-            <MenuButton
+            <PrimaryButton
                 type='transparent'
                 size='lg'
                 disabled
@@ -63,7 +66,7 @@ const Menu = ({ toggle }: { toggle: () => void }) => {
                 className='w-full'
             />
 
-            <MenuButton
+            <PrimaryButton
                 onClick={() => {
                     dispatch(boardModel.actions.reset());
                     toggle();
@@ -83,7 +86,7 @@ const Menu = ({ toggle }: { toggle: () => void }) => {
                 className='w-full'
             />
             <Divider style={{ margin: 0 }} className='w-full' />
-            <MenuButton
+            <PrimaryButton
                 type='transparent'
                 size='lg'
                 content={
@@ -103,7 +106,7 @@ const Menu = ({ toggle }: { toggle: () => void }) => {
                 className='w-full'
             />
             <Divider style={{ margin: 0 }} className='w-full' />
-            <MenuButton type='transparent' size='lg' content={`Sign In`} className='w-full' />
+            <PrimaryButton type='transparent' size='lg' content={`Sign In`} className='w-full' />
         </div>
     );
 };

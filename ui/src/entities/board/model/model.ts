@@ -54,7 +54,6 @@ on({
         if (pointer.info['drafting-an-element']?.mode === 'resizing') {
             dispatch(model.actions.resizeElement({ computedPosition: keyTouchPosition, pointer }));
         } else if (pointer.info['drafting-an-element']?.mode === 'moving') {
-            console.log('here');
             dispatch(model.actions.moveElement({ computedPosition: keyTouchPosition, pointer }));
         }
     },

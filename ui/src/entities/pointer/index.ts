@@ -17,3 +17,4 @@ export { type Pointer, type DraftingMode } from './model/types/state';
 
 // lib
 export { getComputedPosition, getComputedTouchPositions } from './lib/get-computed-position';
+export { isMainButtonPressed } from './lib/is-main-button-pressed';

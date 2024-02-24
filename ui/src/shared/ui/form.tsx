@@ -4,7 +4,7 @@ import { ForwardedRef, forwardRef } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z, type ZodType } from 'zod';
 import { twMerge } from 'tailwind-merge';
-import { Button } from '~/shared/ui/button';
+import { SecondaryButton } from '~/shared/ui/secondary-button';
 import { Loader } from './preloader';
 
 export const FORM_ERROR = 'FORM_ERROR';
@@ -61,7 +61,7 @@ function FormElement<S extends ZodType<any, any>>(
 
                 {submitText ? (
                     <div className='flex flex-col items-center'>
-                        <Button
+                        <SecondaryButton
                             htmlType='submit'
                             className='mt-[14px] w-full '
                             content={
