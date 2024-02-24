@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ConfigProvider } from 'antd';
 
-export const withAntdConfig = (component: () => ReactNode) => () => {
+export const WithAntdConfig = (component: () => ReactNode) => () => {
     return (
         <ConfigProvider
             wave={{ disabled: true }}
