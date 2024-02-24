@@ -84,23 +84,15 @@ export const Board = () => {
             // wheel event
             // onWheel={handleWheel}
             // styling
-            className='relative w-[100vw] h-[100vh] overflow-hidden touch-none'
-            style={{ cursor: getCursorStyle({ element: 'board', draftingMode }) }}
+            className='relative m-16 w-[300px] h-[300px] overflow-hidden touch-none border-2 border-red-300'
+            style={{
+                cursor: getCursorStyle({ element: 'board', draftingMode }),
+            }}
             ref={nodeRef}
         >
-            {elements.map((el) => {
-                return (
-                    <Element
-                        boardNodeRef={nodeRef}
-                        key={el.uniqueKey}
-                        uniqueKey={el.uniqueKey}
-                        type={el.type}
-                        position={el.position}
-                        size={el.size}
-                        styles={el.styles}
-                    />
-                );
-            })}
+            {elements.map((params) => (
+                <Element boardNodeRef={nodeRef} params={params} />
+            ))}
         </div>
     );
 };

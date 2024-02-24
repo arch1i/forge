@@ -4,11 +4,14 @@ import { getCursorStyle } from '../lib/get-cursor-style';
 import { type TouchEventHandler, type MouseEventHandler, type RefObject } from 'react';
 import { type Element as ElementInterface } from '../model/types/element';
 
-interface Params extends ElementInterface {
+interface Params {
     boardNodeRef: RefObject<HTMLDivElement>;
+    params: ElementInterface;
 }
 
-export const Element = ({ position, size, uniqueKey, type, boardNodeRef }: Params) => {
+export const Element = ({ boardNodeRef, params }: Params) => {
+    const { position, size, uniqueKey, type } = params;
+
     const dispatch = useAppDispatch();
     const draftingMode = pointerModel.selectors.useDraftingMode();
 
