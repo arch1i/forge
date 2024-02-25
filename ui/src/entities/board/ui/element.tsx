@@ -10,9 +10,9 @@ interface Params {
 }
 
 export const Element = ({ boardNodeRef, params }: Params) => {
+    const dispatch = useAppDispatch();
     const { position, size, uniqueKey, type } = params;
 
-    const dispatch = useAppDispatch();
     const draftingMode = pointerModel.selectors.useDraftingMode();
 
     const handleMouseDrag: MouseEventHandler = (ev) => {
@@ -67,7 +67,9 @@ export const Element = ({ boardNodeRef, params }: Params) => {
                 height: `${size.height}px`,
                 cursor: getCursorStyle({ element: type, draftingMode }),
             }}
-            className='rounded-[20px] border-2 border-[#366fbc]'
-        />
+            className='rounded-[10px] border-2 border-[#366fbc] text-center overflow-hidden flex items-center justify-center'
+        >
+            <span className='text-blue-900'>placeholder</span>
+        </div>
     );
 };
