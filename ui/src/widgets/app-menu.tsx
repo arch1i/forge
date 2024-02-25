@@ -31,7 +31,7 @@ const Dropdown = ({ toggle, isVisible }: { toggle: () => void; isVisible: boolea
     return (
         <div
             style={{ display: isVisible ? 'flex' : 'none' }}
-            className='bg-white shadow-box flex-col gap-y-[0.4rem] p-2 absolute top-10 left-0 rounded-[4px]'
+            className='bg-white shadow-box flex-col gap-y-[0.4rem] p-2 absolute top-11 lg:top-10 left-0 rounded-[4px]'
         >
             <PrimaryButton
                 type='transparent'
