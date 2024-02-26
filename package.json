@@ -1,15 +1,17 @@
 {
-  "name": "forge",
-  "version": "0.0.1",
-  "private": "true",
-  "license": "MIT",
-  "scripts": {
-    "build:apps": "yarn install && cd db && npx prisma generate && cd ../backend && yarn test && yarn lint && yarn build && cd ../ui yarn lint && yarn build"
-  },
-  "workspaces": [
-    "ui",
-    "backend",
-    "db",
-    "dto"
-  ]
+    "name": "forge",
+    "version": "0.0.1",
+    "private": "true",
+    "license": "MIT",
+    "scripts": {
+        "ui:check": "yarn workspace ui tsc && yarn workspace ui lint && yarn workspace ui test",
+        "ui:preview": "yarn workspace ui lint && yarn workspace ui test && yarn workspace ui build && yarn workspace ui preview",
+        "ui:dev": "yarn workspace ui dev"
+    },
+    "workspaces": [
+        "ui",
+        "backend",
+        "db",
+        "dto"
+    ]
 }
