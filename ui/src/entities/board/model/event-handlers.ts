@@ -94,21 +94,14 @@ const moveElement: CaseReducer<
     }
 };
 
-const validateElement: CaseReducer<Board, PayloadAction<{ elementKey: UniqueKey | undefined }>> = (
-    state,
-    action,
-) => {
-    const { elements } = state;
-    const { elementKey } = action.payload;
+const validateAllElements: CaseReducer<Board> = (state) => {
+    state.elements = state.elements.filter((el) => isElementValid(el));
+};
 
-    if (elementKey) {
-        const index = elements.findIndex((el) => el.uniqueKey === elementKey);
-        const draftedElement = elements[index];
-
-        if (!isElementValid(draftedElement)) {
-            elements.splice(index, 1);
-        }
-    }
+const changeScale: CaseReducer<Board, PayloadAction<{ newValue: number }>> = (state, action) => {
+    const { newValue } = action.payload;
+    // if( newValue < 1) return;
+    state.scale = newValue;
 };
 
 const reset: CaseReducer<Board> = () => {
@@ -117,8 +110,11 @@ const reset: CaseReducer<Board> = () => {
 
 export const handlers = {
     createElement,
-    validateElement,
+    validateAllElements,
+
     resizeElement,
     moveElement,
+
+    changeScale,
     reset,
 };

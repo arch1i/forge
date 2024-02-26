@@ -14,6 +14,9 @@ export const model = createSlice({
     reducers: {
         startDrafting: handlers.startDrafting,
         stopDrafting: handlers.stopDrafting,
+
+        upsertModifyingBoardViewInfo: handlers.upsertModifyingBoardViewInfo,
+        stopModifyingBoardView: handlers.stopModifyingBoardView,
     },
 });
 

@@ -27,7 +27,28 @@ const stopDrafting: CaseReducer<Pointer> = (state) => {
     state.info['drafting-an-element'] = undefined;
 };
 
+const upsertModifyingBoardViewInfo: CaseReducer<
+    Pointer,
+    PayloadAction<{
+        lastTouchPoints?: Array<ComputedPointerPosition>;
+    }>
+> = (state, action) => {
+    const { lastTouchPoints } = action.payload;
+    state.status = 'modifying-board-view';
+    state.info['modifying-board-view'] = {
+        lastTouchPoints,
+    };
+};
+
+const stopModifyingBoardView: CaseReducer<Pointer> = (state) => {
+    state.status = 'idle';
+    state.info['modifying-board-view'] = undefined;
+};
+
 export const handlers = {
     startDrafting,
     stopDrafting,
+
+    upsertModifyingBoardViewInfo,
+    stopModifyingBoardView,
 };
