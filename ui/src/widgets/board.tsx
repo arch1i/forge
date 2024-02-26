@@ -34,7 +34,6 @@ export const Board = () => {
 
     const handleTouchMove: TouchEventHandler = (ev) => {
         ev.stopPropagation();
-
         const boardRect = ev.currentTarget.getBoundingClientRect();
         const touchPoints = getComputedTouchPositions({ targetRect: boardRect, touches: ev.touches });
 
@@ -119,7 +118,7 @@ export const Board = () => {
             onTouchMove={handleTouchMove}
             // wheel event
             // styling
-            className='relative w-[3000px] h-[3000px] overflow-hidden touch-none'
+            className='relative w-[3000px] h-[3000px] overflow-hidden touch-none border border-red-500'
             style={{
                 cursor: getCursorStyle({ element: 'board', draftingMode }),
                 transform: `scale(${scale})`,

@@ -98,10 +98,6 @@ on({
 
             const newScaleValue = board.scale - toScale;
             dispatch(model.actions.changeScale({ newValue: newScaleValue }));
-
-            console.log(toScale);
-            // if scale needed => do scale
-            // if move around board needed => do replace board
         }
     },
 });
