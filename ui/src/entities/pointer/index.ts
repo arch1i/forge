@@ -12,7 +12,7 @@ export const pointerModel = {
 };
 
 // types
-export { type ComputedPointerPosition } from './model/types/core';
+export { type ComputedPointerPosition, type PointerBaseEvent } from './model/types/core';
 export { type Pointer, type DraftingMode } from './model/types/state';
 
 // lib

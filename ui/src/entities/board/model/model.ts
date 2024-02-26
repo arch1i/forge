@@ -8,6 +8,7 @@ import {
     isElementMoving,
     isElementResizing,
 } from '../lib/pointer-move-predicates';
+import { computeScaleValue } from '../lib/compute-scale-value';
 
 export const model = createSlice({
     name: 'board',
@@ -73,31 +74,16 @@ on({
         } else if (isElementMoving({ pointer, event })) {
             dispatch(model.actions.moveElement({ computedPosition: keyTouchPosition, pointer }));
         } else if (isDoubleTouchPoints({ pointer, event })) {
-            const lastPositions = pointer.info['modifying-board-view']?.lastTouchPoints;
-            if (!lastPositions) return;
-
-            const current = {
-                x: Math.abs(event.touchPoints[0].computedX - event.touchPoints[1].computedX),
-                y: Math.abs(event.touchPoints[0].computedY - event.touchPoints[1].computedY),
-            };
-            const initial = {
-                x: Math.abs(lastPositions[0].computedX - lastPositions[1].computedX),
-                y: Math.abs(lastPositions[0].computedY - lastPositions[1].computedY),
-            };
-
-            const currentDiffBetweenTouches = current.x + current.y;
-            const initialDiffBetweenTouches = initial.x + initial.y;
-
-            const toScale = (initialDiffBetweenTouches - currentDiffBetweenTouches) * 0.0008;
-
             dispatch(
                 pointerModel.actions.upsertModifyingBoardViewInfo({
                     lastTouchPoints: event.touchPoints,
                 }),
             );
-
-            const newScaleValue = board.scale - toScale;
-            dispatch(model.actions.changeScale({ newValue: newScaleValue }));
+            dispatch(
+                model.actions.changeScale({
+                    newValue: computeScaleValue({ event, pointer, prevScale: board.scale }),
+                }),
+            );
         }
     },
 });
