@@ -7,9 +7,10 @@ import { type Element as ElementInterface } from '../model/types/element';
 interface Params {
     boardNodeRef: RefObject<HTMLDivElement>;
     params: ElementInterface;
+    scale: number;
 }
 
-export const Element = ({ boardNodeRef, params }: Params) => {
+export const Element = ({ boardNodeRef, params, scale }: Params) => {
     const dispatch = useAppDispatch();
     const { position, size, uniqueKey, type } = params;
 
@@ -23,6 +24,7 @@ export const Element = ({ boardNodeRef, params }: Params) => {
             clientX: ev.clientX,
             clientY: ev.clientY,
             targetRect: boardNodeRef.current.getBoundingClientRect(),
+            scale,
         });
 
         dispatch(
@@ -37,12 +39,13 @@ export const Element = ({ boardNodeRef, params }: Params) => {
 
     const handleTouchDrag: TouchEventHandler = (ev) => {
         ev.stopPropagation();
-        if (!boardNodeRef?.current) return;
+        if (!boardNodeRef?.current || ev.touches.length > 1) return;
 
         const computedPointerPosition = getComputedPosition({
             clientX: ev.touches[0].clientX,
             clientY: ev.touches[0].clientY,
             targetRect: boardNodeRef.current.getBoundingClientRect(),
+            scale,
         });
 
         dispatch(
@@ -63,8 +66,8 @@ export const Element = ({ boardNodeRef, params }: Params) => {
                 position: 'absolute',
                 top: `${position.computedY}px`,
                 left: `${position.computedX}px`,
-                width: `${size.width}px`,
-                height: `${size.height}px`,
+                width: `${size.width * scale}px`,
+                height: `${size.height * scale}px`,
                 cursor: getCursorStyle({ element: type, draftingMode }),
             }}
             className='rounded-[10px] border-2 border-[#366fbc] text-center overflow-hidden flex items-center justify-center'

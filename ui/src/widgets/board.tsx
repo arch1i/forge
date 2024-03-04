@@ -16,13 +16,17 @@ export const Board = () => {
 
     const elements = boardModel.subscribes.useElements();
     const scale = boardModel.subscribes.useScale();
-
+    console.log(scale);
     // surface handlers
     const handleTouchStart: TouchEventHandler = (ev) => {
         ev.stopPropagation();
 
         const boardRect = ev.currentTarget.getBoundingClientRect();
-        const touchPoints = getComputedTouchPositions({ targetRect: boardRect, touches: ev.touches });
+        const touchPoints = getComputedTouchPositions({
+            targetRect: boardRect,
+            touches: ev.touches,
+            scale,
+        });
 
         dispatch(pointerModel.actions.down({ touchPoints }));
     };
@@ -35,7 +39,11 @@ export const Board = () => {
     const handleTouchMove: TouchEventHandler = (ev) => {
         ev.stopPropagation();
         const boardRect = ev.currentTarget.getBoundingClientRect();
-        const touchPoints = getComputedTouchPositions({ targetRect: boardRect, touches: ev.touches });
+        const touchPoints = getComputedTouchPositions({
+            targetRect: boardRect,
+            touches: ev.touches,
+            scale,
+        });
 
         dispatch(pointerModel.actions.moved({ touchPoints }));
     };
@@ -46,20 +54,16 @@ export const Board = () => {
         if (!isMainButtonPressed(ev)) return;
 
         const boardRect = ev.currentTarget.getBoundingClientRect();
-        const { computedX, computedY } = getComputedPosition({
+        const keyTouchPoint = getComputedPosition({
             targetRect: boardRect,
             clientX: ev.clientX,
             clientY: ev.clientY,
+            scale,
         });
 
         dispatch(
             pointerModel.actions.down({
-                touchPoints: [
-                    {
-                        computedX: computedX / scale,
-                        computedY: computedY / scale,
-                    },
-                ],
+                touchPoints: [keyTouchPoint],
             }),
         );
     };
@@ -72,20 +76,16 @@ export const Board = () => {
     const handleMouseMove: MouseEventHandler = (ev) => {
         ev.stopPropagation();
         const boardRect = ev.currentTarget.getBoundingClientRect();
-        const { computedX, computedY } = getComputedPosition({
+        const keyTouchPoint = getComputedPosition({
             targetRect: boardRect,
             clientX: ev.clientX,
             clientY: ev.clientY,
+            scale,
         });
 
         dispatch(
             pointerModel.actions.moved({
-                touchPoints: [
-                    {
-                        computedX: computedX / scale,
-                        computedY: computedY / scale,
-                    },
-                ],
+                touchPoints: [keyTouchPoint],
             }),
         );
     };
@@ -94,18 +94,29 @@ export const Board = () => {
         // send desktop scale event
         const handleWheel = (ev: WheelEvent) => {
             ev.preventDefault();
-            // if (ev.ctrlKey) {
-            //     setScale((prev) => {
-            //         if (prev <= 1 && ev.deltaY > 0) return prev;
-            //         const newScale = prev - ev.deltaY * 0.003;
-            //         return newScale < 1 ? 1 : newScale;
-            //     });
-            // }
+            if (ev.ctrlKey) {
+                const newScale = scale + ev.deltaY * 0.1;
+                console.log(newScale);
+                boardModel.actions.changeScale({
+                    newValue: newScale,
+                });
+            }
         };
         nodeRef.current?.addEventListener('wheel', handleWheel, { passive: false });
         return () => nodeRef.current?.removeEventListener('wheel', handleWheel);
     }, []);
 
+    // const BOARD_SIZE = 3000; // to board model
+
+    // const s = scale >= 1 ? scale - 1 : 1 - scale;
+
+    // const val = nodeRef.current?.getBoundingClientRect().width * s;
+
+    // const pos =
+    //     scale <= 1
+    //         ? `-${val / nodeRef.current?.getBoundingClientRect().width}px`
+    //         : `${val / nodeRef.current?.getBoundingClientRect().width}px`;
+    console.log(scale);
     return (
         <div
             // desktop events
@@ -116,17 +127,20 @@ export const Board = () => {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onTouchMove={handleTouchMove}
-            // wheel event
-            // styling
-            className='relative w-[3000px] h-[3000px] overflow-hidden touch-none border border-red-500'
+            className='relative w-[3000px] h-[3000px] border border-red-500 touch-none'
             style={{
                 cursor: getCursorStyle({ element: 'board', draftingMode }),
-                transform: `scale(${scale})`,
+                zoom: scale,
             }}
             ref={nodeRef}
         >
             {elements.map((params) => (
-                <Element key={params.uniqueKey} boardNodeRef={nodeRef} params={params} />
+                <Element
+                    scale={scale}
+                    key={params.uniqueKey}
+                    boardNodeRef={nodeRef}
+                    params={params}
+                />
             ))}
         </div>
     );

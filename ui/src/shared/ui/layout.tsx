@@ -19,15 +19,15 @@ export function Layout({ isAppLoading, appMenuButtonSlot }: Props) {
                     initial={{ opacity: 0.5 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className='flex flex-row relative font-sans select-none touch-none overflow-hidden'
+                    className='flex flex-row relative font-sans select-none '
                 >
                     {appMenuButtonSlot && (
                         <section className='z-50 absolute top-[1rem] left-[2.2%] md:left-[1.7%] lg:left-[1.3%]'>
                             {appMenuButtonSlot}
                         </section>
                     )}
-
-                    <section className='z-0 touch-none overflow-hidden'>
+                    {/* touch-none overflow-hidden  */}
+                    <section className='z-0relative'>
                         <Outlet />
                     </section>
 

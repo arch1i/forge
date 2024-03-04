@@ -5,20 +5,23 @@ export function getComputedPosition(position: {
     targetRect: DOMRect;
     clientX: number;
     clientY: number;
+    scale: number;
 }): ComputedPointerPosition {
-    const { clientX, clientY, targetRect } = position;
+    const { clientX, clientY, targetRect, scale } = position;
     return {
-        computedX: clientX - targetRect.x,
-        computedY: clientY - targetRect.y,
+        computedX: (clientX - targetRect.x) / scale,
+        computedY: (clientY - targetRect.y) / scale,
     };
 }
 
 export function getComputedTouchPositions({
     targetRect,
     touches,
+    scale,
 }: {
     targetRect: DOMRect;
     touches: TouchList;
+    scale: number;
 }): Array<ComputedPointerPosition> {
     const computedPositions: Array<ComputedPointerPosition> = [];
 
@@ -26,7 +29,7 @@ export function getComputedTouchPositions({
         const { clientX, clientY } = touches[i];
         if (isNaN(clientX) || isNaN(clientY)) continue;
 
-        computedPositions.push(getComputedPosition({ targetRect, clientX, clientY }));
+        computedPositions.push(getComputedPosition({ targetRect, clientX, clientY, scale }));
     }
 
     return computedPositions;
