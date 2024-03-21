@@ -42,7 +42,7 @@ export default function Canvas() {
 
     const handleMouseEvent = (event: MouseEvent) => {
         event.preventDefault();
-        canvasEngine?.consumeMouseEvent(event);
+        // canvasEngine?.consumeMouseEvent(event);
     };
 
     const handleTouchEvent = (event: TouchEvent) => {

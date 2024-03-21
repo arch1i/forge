@@ -1,4 +1,4 @@
-import { type WheelEvent, type MouseEvent, type TouchEvent, type TouchList } from 'react';
+import { type WheelEvent, type TouchEvent, type TouchList } from 'react';
 import { getTranslateDir } from './lib/get-translate-dir';
 
 export class CanvasEngine {
@@ -17,7 +17,7 @@ export class CanvasEngine {
     private shapes: Array<any>;
     private pointer: Pointer = { mode: 'idle', info: {} };
 
-    consumeMouseEvent(event: MouseEvent) {}
+    // consumeMouseEvent(event: MouseEvent) {}
 
     consumeTouchEvent(event: TouchEvent) {
         if (event.type === 'touchstart') {
