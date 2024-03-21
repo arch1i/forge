@@ -1,7 +1,5 @@
 import { Divider } from 'antd';
 import { useReducer } from 'react';
-import { useAppDispatch } from '~/app/store/hooks';
-import { boardModel } from '~/entities/board';
 import { Icon } from '~/shared/ui/icon';
 import { PrimaryButton } from '~/shared/ui/primary-button';
 
@@ -25,9 +23,7 @@ export const AppMenu = () => {
     );
 };
 
-const Dropdown = ({ toggle, isVisible }: { toggle: () => void; isVisible: boolean }) => {
-    const dispatch = useAppDispatch();
-
+const Dropdown = ({ isVisible }: { toggle: () => void; isVisible: boolean }) => {
     return (
         <div
             style={{ display: isVisible ? 'flex' : 'none' }}
@@ -67,10 +63,6 @@ const Dropdown = ({ toggle, isVisible }: { toggle: () => void; isVisible: boolea
             />
 
             <PrimaryButton
-                onClick={() => {
-                    dispatch(boardModel.actions.reset());
-                    toggle();
-                }}
                 type='transparent'
                 size='lg'
                 content={

@@ -9,7 +9,7 @@ export const appRouter = () =>
             children: [
                 {
                     path: '/',
-                    element: <Pages.Board />,
+                    element: <Pages.Canvas />,
                 },
 
                 {

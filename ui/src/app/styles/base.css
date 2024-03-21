@@ -49,18 +49,22 @@ select:-webkit-autofill:focus {
 *:focus {
     outline: none;
 }
-html {
+
+html,
+body {
     overflow: hidden;
+    overscroll-behavior-x: none;
+    zoom: normal;
 }
 
 body {
     min-height: 100vh;
+    touch-action: none;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     overflow-anchor: none;
     margin: 0;
-    overflow: hidden;
 }
 
 ul[class],
